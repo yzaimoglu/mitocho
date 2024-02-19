@@ -70,3 +70,4 @@ logs
 .cache
 .env
 *_templ.go
+.idea
