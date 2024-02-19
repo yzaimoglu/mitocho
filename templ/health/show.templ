@@ -1,0 +1,15 @@
+package health
+
+import (
+    "github.com/yzaimoglu/mitocho/templ/layout"
+)
+
+templ Show(name string) {
+	<div>Hello, { name }</div>
+}
+
+templ ShowIndex(title, description string, cmp templ.Component) {
+    @layout.Base(title, description, true) {
+        @cmp
+    }
+}
