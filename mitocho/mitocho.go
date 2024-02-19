@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/tls"
 	"errors"
+	"fmt"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/yzaimoglu/mitocho/config"
@@ -58,7 +59,7 @@ func (mitocho *Mitocho) StartHTTPS() error {
 	}
 
 	tlsServer := http.Server{
-		Addr:    ":443",
+		Addr:    fmt.Sprintf(":%s", config.HTTPSPort()),
 		Handler: mitocho.Echo,
 		TLSConfig: &tls.Config{
 			GetCertificate: autoTLSManager.GetCertificate,
@@ -70,7 +71,7 @@ func (mitocho *Mitocho) StartHTTPS() error {
 }
 
 func (mitocho *Mitocho) StartHTTP() error {
-	return mitocho.Echo.Start(":80")
+	return mitocho.Echo.Start(fmt.Sprintf(":%s", config.HTTPPort()))
 }
 
 func (mitocho *Mitocho) Start() error {
