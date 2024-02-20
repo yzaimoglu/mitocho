@@ -21,14 +21,3 @@ func (base *BaseModel) BeforeCreate(tx *gorm.DB) error {
 	base.ID = id
 	return nil
 }
-
-func (base *BaseModel) BeforeUpdate(tx *gorm.DB) error {
-	base.UpdatedAt = time.Now()
-	return nil
-}
-
-func (base *BaseModel) BeforeDelete(tx *gorm.DB) error {
-	now := time.Now()
-	base.DeletedAt = &now
-	return nil
-}

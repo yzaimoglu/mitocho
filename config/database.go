@@ -2,7 +2,7 @@ package config
 
 import (
 	"fmt"
-	"github.com/yzaimoglu/mitocho/data"
+	"github.com/yzaimoglu/mitocho/data/types"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"log"

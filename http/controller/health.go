@@ -18,7 +18,7 @@ func (controller *Controller) GetViewHealth(c echo.Context) error {
 		health.ShowIndex("test", "wow", health.Show("hey")))
 }
 
-func (controller *Controller) GetApiHealthRequest(c echo.Context) error {
+func (controller *Controller) GetViewHealthRequest(c echo.Context) error {
 	req := c.Request()
 	format := `
 		<code>
