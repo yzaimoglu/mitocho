@@ -69,7 +69,6 @@ logs
 *.crt
 .cache
 .env
-*_templ.go
 .idea
 *_development*
 scripts
