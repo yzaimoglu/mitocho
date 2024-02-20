@@ -1,4 +1,4 @@
-package data
+package types
 
 type Setting struct {
 	BaseModel

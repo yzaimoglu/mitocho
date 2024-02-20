@@ -7,18 +7,18 @@ import (
 	"net/http"
 )
 
-func (controller *Controller) GetApiHealth(c echo.Context) error {
+func (ctrl *Controller) GetApiHealth(c echo.Context) error {
 	return c.JSON(200, map[string]any{
 		"status": "healthy",
 	})
 }
 
-func (controller *Controller) GetViewHealth(c echo.Context) error {
-	return controller.View(c,
+func (ctrl *Controller) GetViewHealth(c echo.Context) error {
+	return ctrl.View(c,
 		health.ShowIndex("test", "wow", health.Show("hey")))
 }
 
-func (controller *Controller) GetViewHealthRequest(c echo.Context) error {
+func (ctrl *Controller) GetViewHealthRequest(c echo.Context) error {
 	req := c.Request()
 	format := `
 		<code>
