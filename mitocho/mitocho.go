@@ -20,10 +20,11 @@ import (
 
 type Mitocho struct {
 	Echo  *echo.Echo
+	DB    *config.Database
 	Debug bool
 }
 
-func NewMitocho() *Mitocho {
+func NewMitocho(db *config.Database) *Mitocho {
 	e := echo.New()
 	e.Use(middleware.HTTPSRedirect())
 	e.Use(middleware.HTTPSNonWWWRedirect())
@@ -43,6 +44,7 @@ func NewMitocho() *Mitocho {
 
 	return &Mitocho{
 		Echo:  e,
+		DB:    db,
 		Debug: config.Debug(),
 	}
 }
