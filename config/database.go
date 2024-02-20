@@ -70,6 +70,6 @@ func (db *Database) Close() error {
 }
 
 func (db *Database) Migrate() error {
-	err := db.DB.AutoMigrate(&data.Setting{})
+	err := db.DB.AutoMigrate(&types.Setting{})
 	return err
 }
