@@ -71,7 +71,7 @@ func Head(title, description string, alpine bool) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"><script src=\"https://cdn.tailwindcss.com\"></script><link href=\"https://cdn.jsdelivr.net/npm/daisyui@4.4.10/dist/full.min.css\" rel=\"stylesheet\" type=\"text/css\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"><link href=\"/static/main.css\" rel=\"stylesheet\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -88,7 +88,7 @@ func Head(title, description string, alpine bool) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ\layout\base.templ`, Line: 24, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templ\layout\base.templ`, Line: 23, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {

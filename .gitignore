@@ -72,3 +72,5 @@ logs
 .idea
 *_development*
 scripts
+package-lock.json
+node_modules

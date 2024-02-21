@@ -17,8 +17,7 @@ templ Head(title, description string, alpine bool) {
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="description" content={ description }/>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.10/dist/full.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/static/main.css" rel="stylesheet" />
         if alpine {
             <script src="//unpkg.com/alpinejs" defer></script>
         }
