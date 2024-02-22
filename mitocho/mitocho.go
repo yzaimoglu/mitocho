@@ -49,32 +49,19 @@ func NewMitocho(db *config.Database) *Mitocho {
 
 func (mitocho *Mitocho) StartHTTPS() error {
 	if config.SSL() {
-		//if config.Debug() {
-		//	return mitocho.Echo.StartTLS(":"+config.HTTPSPort(), "ssl/cert.pem", "ssl/key.pem")
-		//}
+		if config.Debug() {
+			if err := crypto.GenerateKeysFiles(); err != nil {
+				return err
+			}
+			return mitocho.Echo.StartTLS(":"+config.HTTPSPort(), "ssl/cert.pem", "ssl/key.pem")
+		}
 
-		if err := crypto.GenerateKeys(); err != nil {
+		cert, key, err := crypto.GenerateKeysBytes()
+		if err != nil {
 			return err
 		}
 
-		return mitocho.Echo.StartTLS(":"+config.HTTPSPort(), "cert.pem", "key.pem")
-
-		//autoTLSManager := autocert.Manager{
-		//	HostPolicy: autocert.HostWhitelist(config.Host()),
-		//	Prompt:     autocert.AcceptTOS,
-		//	Cache:      autocert.DirCache(".cache"),
-		//}
-		//
-		//tlsServer := http.Server{
-		//	Addr:    fmt.Sprintf(":%s", config.HTTPSPort()),
-		//	Handler: mitocho.Echo,
-		//	TLSConfig: &tls.Config{
-		//		GetCertificate: autoTLSManager.GetCertificate,
-		//		NextProtos:     []string{acme.ALPNProto},
-		//	},
-		//}
-		//
-		//return tlsServer.ListenAndServeTLS("", "")
+		return mitocho.Echo.StartTLS(":"+config.HTTPSPort(), cert, key)
 	}
 	return nil
 }
