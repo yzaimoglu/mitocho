@@ -34,3 +34,7 @@ func HTTPPort() string {
 func HTTPSPort() string {
 	return os.Getenv("HTTPS_PORT")
 }
+
+func SSL() bool {
+	return os.Getenv("SSL") == "true"
+}

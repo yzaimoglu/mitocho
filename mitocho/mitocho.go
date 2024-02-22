@@ -50,26 +50,29 @@ func NewMitocho(db *config.Database) *Mitocho {
 }
 
 func (mitocho *Mitocho) StartHTTPS() error {
-	if mitocho.Debug {
-		return mitocho.Echo.StartTLS(":443", "ssl/cert.pem", "ssl/key.pem")
-	}
+	if config.SSL() {
+		if mitocho.Debug {
+			return mitocho.Echo.StartTLS(":443", "ssl/cert.pem", "ssl/key.pem")
+		}
 
-	autoTLSManager := autocert.Manager{
-		HostPolicy: autocert.HostWhitelist(config.Host()),
-		Prompt:     autocert.AcceptTOS,
-		Cache:      autocert.DirCache(".cache"),
-	}
+		autoTLSManager := autocert.Manager{
+			HostPolicy: autocert.HostWhitelist(config.Host()),
+			Prompt:     autocert.AcceptTOS,
+			Cache:      autocert.DirCache(".cache"),
+		}
 
-	tlsServer := http.Server{
-		Addr:    fmt.Sprintf(":%s", config.HTTPSPort()),
-		Handler: mitocho.Echo,
-		TLSConfig: &tls.Config{
-			GetCertificate: autoTLSManager.GetCertificate,
-			NextProtos:     []string{acme.ALPNProto},
-		},
-	}
+		tlsServer := http.Server{
+			Addr:    fmt.Sprintf(":%s", config.HTTPSPort()),
+			Handler: mitocho.Echo,
+			TLSConfig: &tls.Config{
+				GetCertificate: autoTLSManager.GetCertificate,
+				NextProtos:     []string{acme.ALPNProto},
+			},
+		}
 
-	return tlsServer.ListenAndServeTLS("", "")
+		return tlsServer.ListenAndServeTLS("", "")
+	}
+	return nil
 }
 
 func (mitocho *Mitocho) StartHTTP() error {
