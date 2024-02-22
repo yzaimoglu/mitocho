@@ -2,14 +2,12 @@ package mitocho
 
 import (
 	"context"
-	"crypto/tls"
 	"errors"
 	"fmt"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/yzaimoglu/mitocho/config"
-	"golang.org/x/crypto/acme"
-	"golang.org/x/crypto/acme/autocert"
+	"github.com/yzaimoglu/mitocho/utils/crypto"
 	"net/http"
 	"os"
 	"os/signal"
@@ -51,26 +49,32 @@ func NewMitocho(db *config.Database) *Mitocho {
 
 func (mitocho *Mitocho) StartHTTPS() error {
 	if config.SSL() {
-		if mitocho.Debug {
-			return mitocho.Echo.StartTLS(":443", "ssl/cert.pem", "ssl/key.pem")
+		//if config.Debug() {
+		//	return mitocho.Echo.StartTLS(":"+config.HTTPSPort(), "ssl/cert.pem", "ssl/key.pem")
+		//}
+
+		if err := crypto.GenerateKeys(); err != nil {
+			return err
 		}
 
-		autoTLSManager := autocert.Manager{
-			HostPolicy: autocert.HostWhitelist(config.Host()),
-			Prompt:     autocert.AcceptTOS,
-			Cache:      autocert.DirCache(".cache"),
-		}
+		return mitocho.Echo.StartTLS(":"+config.HTTPSPort(), "cert.pem", "key.pem")
 
-		tlsServer := http.Server{
-			Addr:    fmt.Sprintf(":%s", config.HTTPSPort()),
-			Handler: mitocho.Echo,
-			TLSConfig: &tls.Config{
-				GetCertificate: autoTLSManager.GetCertificate,
-				NextProtos:     []string{acme.ALPNProto},
-			},
-		}
-
-		return tlsServer.ListenAndServeTLS("", "")
+		//autoTLSManager := autocert.Manager{
+		//	HostPolicy: autocert.HostWhitelist(config.Host()),
+		//	Prompt:     autocert.AcceptTOS,
+		//	Cache:      autocert.DirCache(".cache"),
+		//}
+		//
+		//tlsServer := http.Server{
+		//	Addr:    fmt.Sprintf(":%s", config.HTTPSPort()),
+		//	Handler: mitocho.Echo,
+		//	TLSConfig: &tls.Config{
+		//		GetCertificate: autoTLSManager.GetCertificate,
+		//		NextProtos:     []string{acme.ALPNProto},
+		//	},
+		//}
+		//
+		//return tlsServer.ListenAndServeTLS("", "")
 	}
 	return nil
 }

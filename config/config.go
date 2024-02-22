@@ -16,6 +16,7 @@ func LoadEnv() {
 	}
 }
 
+// Debug returns whether the website is in debug mode.
 func Debug() bool {
 	return os.Getenv("DEBUG") == "true"
 }
@@ -35,6 +36,7 @@ func HTTPSPort() string {
 	return os.Getenv("HTTPS_PORT")
 }
 
+// SSL returns whether the website should create an SSL Server.
 func SSL() bool {
 	return os.Getenv("SSL") == "true"
 }
