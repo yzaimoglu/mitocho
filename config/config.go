@@ -2,6 +2,7 @@ package config
 
 import (
 	"github.com/joho/godotenv"
+	"github.com/labstack/gommon/log"
 	"os"
 )
 
@@ -11,7 +12,7 @@ func Load() {
 
 func LoadEnv() {
 	if err := godotenv.Load(); err != nil {
-		panic(err)
+		log.Infof("No .env file found. Defaulting to system environment variables.")
 	}
 }
 
