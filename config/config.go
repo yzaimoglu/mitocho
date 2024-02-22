@@ -27,7 +27,7 @@ func Host() string {
 
 // HTTPPort returns the port number for HTTP.
 func HTTPPort() string {
-	return os.Getenv("HTTP_PORT")
+	return os.Getenv("PORT")
 }
 
 // HTTPSPort returns the port number for HTTPS.

@@ -5,7 +5,6 @@ import (
 	"github.com/yzaimoglu/mitocho/data/types"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"log"
 	"net/url"
 	"os"
 	"strings"
@@ -58,7 +57,7 @@ func (db *Database) Connect() {
 		panic("Failed to connect to database")
 	}
 	db.DB = database
-	log.Default().Print("Connected to database")
+	fmt.Println("Connected to database")
 }
 
 func (db *Database) Close() error {
