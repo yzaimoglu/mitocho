@@ -95,16 +95,18 @@ func (mitocho *Mitocho) Start() error {
 		}
 	}()
 
-	// Start HTTPS Server
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		if err := mitocho.StartHTTPS(); !errors.Is(err, http.ErrServerClosed) {
-			mitocho.Echo.Logger.Fatalf("Error when starting HTTPS server: %w", err)
-		} else {
-			mitocho.Echo.Logger.Info("HTTPS server stopped")
-		}
-	}()
+	if config.SSL() {
+		// Start HTTPS Server
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			if err := mitocho.StartHTTPS(); !errors.Is(err, http.ErrServerClosed) {
+				mitocho.Echo.Logger.Fatalf("Error when starting HTTPS server: %w", err)
+			} else {
+				mitocho.Echo.Logger.Info("HTTPS server stopped")
+			}
+		}()
+	}
 
 	// Wait for termination signal SIGTERM
 	wg.Add(1)
