@@ -81,5 +81,17 @@ func (db *Database) Migrate() error {
 	if err != nil {
 		return err
 	}
+	err = db.Gorm.AutoMigrate(&types.Site{})
+	if err != nil {
+		return err
+	}
+	err = db.Gorm.AutoMigrate(&types.SiteRole{})
+	if err != nil {
+		return err
+	}
+	err = db.Gorm.AutoMigrate(&types.SiteUser{})
+	if err != nil {
+		return err
+	}
 	return err
 }
