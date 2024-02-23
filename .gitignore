@@ -74,3 +74,5 @@ logs
 scripts
 package-lock.json
 node_modules
+tmp
+*templ.txt
