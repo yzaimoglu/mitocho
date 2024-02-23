@@ -5,5 +5,6 @@ import (
 )
 
 func (api *Api) GetHealthApiRoutes(group *echo.Group) {
-	group.GET("health", api.Controller.GetApiHealth)
+	healthGroup := group.Group("health/")
+	healthGroup.GET("", api.Controller.GetApiHealth)
 }

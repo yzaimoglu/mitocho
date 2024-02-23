@@ -6,6 +6,8 @@ import (
 	"time"
 )
 
+type JSON map[string]any
+
 type BaseModel struct {
 	ID        uuid.UUID  `gorm:"type:char(36);primaryKey" json:"id"`
 	CreatedAt time.Time  `json:"created_at"`
