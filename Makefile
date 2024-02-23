@@ -4,7 +4,7 @@ run: build
 	@./$(TARGET)
 
 templ:
-	@templ generate -watch -proxy=http://localhost
+	@templ generate --watch --proxy=http://localhost
 
 tailwind:
 	@npx tailwindcss -i ./templ/input.css -o ./templ/static/main.css --watch

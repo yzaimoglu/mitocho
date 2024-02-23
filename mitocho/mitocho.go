@@ -24,8 +24,10 @@ type Mitocho struct {
 
 func NewMitocho(db *config.Database) *Mitocho {
 	e := echo.New()
-	e.Use(middleware.HTTPSRedirect())
-	e.Use(middleware.HTTPSNonWWWRedirect())
+	if !config.Debug() {
+		e.Use(middleware.HTTPSRedirect())
+		e.Use(middleware.HTTPSNonWWWRedirect())
+	}
 	e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
 		Level: 5,
 	}))
