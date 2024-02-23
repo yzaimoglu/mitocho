@@ -42,6 +42,7 @@ func NewMitocho(db *config.Database) *Mitocho {
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
 	e.Static("/static", "templ/static")
+	e.HideBanner = true
 
 	return &Mitocho{
 		Echo:  e,
