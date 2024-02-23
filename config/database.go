@@ -11,7 +11,7 @@ import (
 )
 
 type Database struct {
-	DB *gorm.DB
+	Gorm *gorm.DB
 }
 
 func GetDatabaseURL() string {
@@ -56,12 +56,12 @@ func (db *Database) Connect() {
 	if err != nil {
 		panic("Failed to connect to database")
 	}
-	db.DB = database
+	db.Gorm = database
 	fmt.Println("Connected to database")
 }
 
 func (db *Database) Close() error {
-	sqlDB, err := db.DB.DB()
+	sqlDB, err := db.Gorm.DB()
 	if err != nil {
 		panic("Failed to close database")
 	}
@@ -69,15 +69,15 @@ func (db *Database) Close() error {
 }
 
 func (db *Database) Migrate() error {
-	err := db.DB.AutoMigrate(&types.Setting{})
+	err := db.Gorm.AutoMigrate(&types.Setting{})
 	if err != nil {
 		return err
 	}
-	err = db.DB.AutoMigrate(&types.Role{})
+	err = db.Gorm.AutoMigrate(&types.Role{})
 	if err != nil {
 		return err
 	}
-	err = db.DB.AutoMigrate(&types.User{})
+	err = db.Gorm.AutoMigrate(&types.User{})
 	if err != nil {
 		return err
 	}

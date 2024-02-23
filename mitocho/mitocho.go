@@ -24,6 +24,7 @@ type Mitocho struct {
 
 func NewMitocho(db *config.Database) *Mitocho {
 	e := echo.New()
+	e.Validator = config.NewValidator()
 	if !config.Debug() {
 		e.Use(middleware.HTTPSRedirect())
 		e.Use(middleware.HTTPSNonWWWRedirect())

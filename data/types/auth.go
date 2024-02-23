@@ -1,18 +1,40 @@
 package types
 
-import "github.com/google/uuid"
+import (
+	"encoding/json"
+	"github.com/google/uuid"
+)
 
 type Permission string
+type PermissionJSON json.RawMessage
+
+func CreatePermissionsJSON(perms []Permission) PermissionJSON {
+	permsJSON, _ := json.Marshal(perms)
+	return permsJSON
+}
 
 type Role struct {
 	BaseModel
-	Name         string       `json:"name"`
-	ReadableName string       `json:"readable_name"`
-	Permissions  []Permission `gorm:"type:json" json:"permissions"`
+	Name         string         `json:"name"`
+	ReadableName string         `json:"readable_name"`
+	Permissions  PermissionJSON `gorm:"type:json" json:"permissions"`
 }
 
-func (r *Role) hasPermission(permission Permission) bool {
-	for _, p := range r.Permissions {
+func (r *Role) GetPermissions() ([]Permission, error) {
+	var perms []Permission
+	err := json.Unmarshal(r.Permissions, &perms)
+	if err != nil {
+		return nil, err
+	}
+	return perms, nil
+}
+
+func (r *Role) HasPermission(permission Permission) bool {
+	perms, err := r.GetPermissions()
+	if err != nil {
+		return false
+	}
+	for _, p := range perms {
 		if p == permission {
 			return true
 		}
@@ -22,16 +44,29 @@ func (r *Role) hasPermission(permission Permission) bool {
 
 type User struct {
 	BaseModel
-	Username    string       `json:"username"`
-	Password    string       `json:"password"`
-	Email       string       `json:"email"`
-	Role        Role         `json:"role"`
-	RoleID      uuid.UUID    `gorm:"type:char(36)" json:"-"`
-	Permissions []Permission `gorm:"type:json" json:"permissions"`
+	Username    string         `json:"username"`
+	Password    string         `json:"password"`
+	Email       string         `json:"email"`
+	Role        Role           `json:"role"`
+	RoleID      uuid.UUID      `gorm:"type:char(36)" json:"-"`
+	Permissions PermissionJSON `gorm:"type:json" json:"permissions"`
 }
 
-func (u *User) hasUserPermission(permission Permission) bool {
-	for _, p := range u.Permissions {
+func (u *User) GetPermissions() ([]Permission, error) {
+	var perms []Permission
+	err := json.Unmarshal(u.Permissions, &perms)
+	if err != nil {
+		return nil, err
+	}
+	return perms, nil
+}
+
+func (u *User) HasUserPermission(permission Permission) bool {
+	perms, err := u.GetPermissions()
+	if err != nil {
+		return false
+	}
+	for _, p := range perms {
 		if p == permission {
 			return true
 		}
@@ -39,9 +74,9 @@ func (u *User) hasUserPermission(permission Permission) bool {
 	return false
 }
 
-func (u *User) hasPermission(permission Permission) bool {
-	if rolePerm := u.Role.hasPermission(permission); rolePerm {
+func (u *User) HasPermission(permission Permission) bool {
+	if rolePerm := u.Role.HasPermission(permission); rolePerm {
 		return true
 	}
-	return u.hasUserPermission(permission)
+	return u.HasUserPermission(permission)
 }
