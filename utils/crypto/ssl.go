@@ -11,7 +11,6 @@ import (
 	"encoding/pem"
 	"flag"
 	"github.com/labstack/gommon/log"
-	"github.com/yzaimoglu/mitocho/config"
 	"math/big"
 	"net"
 	"os"
@@ -40,7 +39,7 @@ func publicKey(priv any) any {
 	}
 }
 
-func GenerateKeysFiles() error {
+func GenerateKeysFiles(host string) error {
 	if err := os.Mkdir("ssl", 0755); err != nil {
 		log.Print("ssl directory already exists")
 	}
@@ -124,10 +123,10 @@ func GenerateKeysFiles() error {
 		BasicConstraintsValid: true,
 	}
 
-	if ip := net.ParseIP(config.Host()); ip != nil {
+	if ip := net.ParseIP(host); ip != nil {
 		template.IPAddresses = append(template.IPAddresses, ip)
 	} else {
-		template.DNSNames = append(template.DNSNames, config.Host())
+		template.DNSNames = append(template.DNSNames, host)
 	}
 
 	if *isCA {
@@ -178,7 +177,7 @@ func GenerateKeysFiles() error {
 	return nil
 }
 
-func GenerateKeysBytes() (cert []byte, key []byte, returnErr error) {
+func GenerateKeysBytes(host string) (cert []byte, key []byte, returnErr error) {
 	var priv any
 	var err error
 	switch *ecdsaCurve {
@@ -248,10 +247,10 @@ func GenerateKeysBytes() (cert []byte, key []byte, returnErr error) {
 		BasicConstraintsValid: true,
 	}
 
-	if ip := net.ParseIP(config.Host()); ip != nil {
+	if ip := net.ParseIP(host); ip != nil {
 		template.IPAddresses = append(template.IPAddresses, ip)
 	} else {
-		template.DNSNames = append(template.DNSNames, config.Host())
+		template.DNSNames = append(template.DNSNames, host)
 	}
 
 	if *isCA {

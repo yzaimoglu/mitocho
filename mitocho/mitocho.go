@@ -53,13 +53,13 @@ func NewMitocho(db *config.Database) *Mitocho {
 func (mitocho *Mitocho) StartHTTPS() error {
 	if config.SSL() {
 		if config.Debug() {
-			if err := crypto.GenerateKeysFiles(); err != nil {
+			if err := crypto.GenerateKeysFiles(config.Host()); err != nil {
 				return err
 			}
 			return mitocho.Echo.StartTLS(":"+config.HTTPSPort(), "ssl/cert.pem", "ssl/key.pem")
 		}
 
-		cert, key, err := crypto.GenerateKeysBytes()
+		cert, key, err := crypto.GenerateKeysBytes(config.Host())
 		if err != nil {
 			return err
 		}

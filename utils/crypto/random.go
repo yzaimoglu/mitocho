@@ -3,7 +3,6 @@ package crypto
 import (
 	"crypto/rand"
 	"encoding/hex"
-	"github.com/yzaimoglu/mitocho/data/types"
 )
 
 func generateToken(tokenLength int) (string, error) {
@@ -14,7 +13,6 @@ func generateToken(tokenLength int) (string, error) {
 	return hex.EncodeToString(bytes), nil
 }
 
-func GenerateAccessToken() (types.AccessToken, error) {
-	token, err := generateToken(64)
-	return types.AccessToken(token), err
+func GenerateAccessToken() (string, error) {
+	return generateToken(64)
 }

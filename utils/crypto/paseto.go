@@ -2,7 +2,6 @@ package crypto
 
 import (
 	"aidanwoods.dev/go-paseto"
-	"github.com/yzaimoglu/mitocho/data/types"
 	"time"
 )
 
@@ -73,8 +72,8 @@ func (p *PasetoGen) CreateToken(audience string, issuer string, expiration time.
 
 }
 
-func (p *PasetoGen) CreateAccessToken(site types.Site, payload any) (string, error) {
-	audience := site.Domain
+func (p *PasetoGen) CreateAccessToken(domain string, payload any) (string, error) {
+	audience := domain
 	expiration := time.Now().Add(time.Hour * 1)
 	subject := Access
 	notBefore := time.Now()
@@ -83,8 +82,8 @@ func (p *PasetoGen) CreateAccessToken(site types.Site, payload any) (string, err
 	return p.CreateToken(audience, Issuer, expiration, subject, notBefore, issuedAt, payload)
 }
 
-func (p *PasetoGen) CreateRefreshToken(site types.Site, payload any) (string, error) {
-	audience := site.Domain
+func (p *PasetoGen) CreateRefreshToken(domain string, payload any) (string, error) {
+	audience := domain
 	expiration := time.Now().Add(time.Hour * 24 * 7)
 	subject := Refresh
 	notBefore := time.Now()

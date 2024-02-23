@@ -35,7 +35,7 @@ func NewSite(name string, domain string) *Site {
 		Name:        name,
 		Domain:      domain,
 		Active:      true,
-		AccessToken: accessToken,
+		AccessToken: AccessToken(accessToken),
 		PublicKey:   PasetoKeyHex(pasetoGen.PublicKeyHex()),
 		PrivateKey:  PasetoKeyHex(pasetoGen.PrivateKeyHex()),
 	}
