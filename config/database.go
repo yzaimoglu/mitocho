@@ -70,5 +70,16 @@ func (db *Database) Close() error {
 
 func (db *Database) Migrate() error {
 	err := db.DB.AutoMigrate(&types.Setting{})
+	if err != nil {
+		return err
+	}
+	err = db.DB.AutoMigrate(&types.Role{})
+	if err != nil {
+		return err
+	}
+	err = db.DB.AutoMigrate(&types.User{})
+	if err != nil {
+		return err
+	}
 	return err
 }

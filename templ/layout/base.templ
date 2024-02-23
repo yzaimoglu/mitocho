@@ -3,7 +3,7 @@ package layout
 templ Base(title, description string, alpine bool) {
 	<!DOCTYPE html>
 	<html lang="en">
-        @Head(title, description, alpine)
+		@Head(title, description, alpine)
 		<body class="">
 			<main>
 				{ children... }
@@ -13,14 +13,14 @@ templ Base(title, description string, alpine bool) {
 }
 
 templ Head(title, description string, alpine bool) {
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <meta name="description" content={ description }/>
-        <link href="/static/main.css" rel="stylesheet" />
-        if alpine {
-            <script src="//unpkg.com/alpinejs" defer></script>
-        }
-        <title>{ title }</title>
-    </head>
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="description" content={ description }/>
+		<link href="/static/main.css" rel="stylesheet"/>
+		if alpine {
+			<script src="//unpkg.com/alpinejs" defer></script>
+		}
+		<title>{ title }</title>
+	</head>
 }
