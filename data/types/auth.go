@@ -3,6 +3,7 @@ package types
 import (
 	"encoding/json"
 	"github.com/google/uuid"
+	"github.com/yzaimoglu/mitocho/data/constants"
 )
 
 type Permission string
@@ -35,7 +36,7 @@ func (r *Role) HasPermission(permission Permission) bool {
 		return false
 	}
 	for _, p := range perms {
-		if p == permission {
+		if p == permission || p == constants.PermissionAll {
 			return true
 		}
 	}
@@ -67,7 +68,7 @@ func (u *User) HasUserPermission(permission Permission) bool {
 		return false
 	}
 	for _, p := range perms {
-		if p == permission {
+		if p == permission || p == constants.PermissionAll {
 			return true
 		}
 	}
