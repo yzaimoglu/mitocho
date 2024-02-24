@@ -3,11 +3,15 @@ package types
 import (
 	"encoding/json"
 	"github.com/google/uuid"
-	"github.com/yzaimoglu/mitocho/data/constants"
 )
 
 type Permission string
 type PermissionJSON json.RawMessage
+
+const (
+	PermissionAll   Permission = "*"
+	PermissionAdmin Permission = "mitocho.admin"
+)
 
 func CreatePermissionsJSON(perms []Permission) PermissionJSON {
 	permsJSON, _ := json.Marshal(perms)
@@ -36,7 +40,7 @@ func (r *Role) HasPermission(permission Permission) bool {
 		return false
 	}
 	for _, p := range perms {
-		if p == permission || p == constants.PermissionAll {
+		if p == permission || p == PermissionAll {
 			return true
 		}
 	}
@@ -68,7 +72,7 @@ func (u *User) HasUserPermission(permission Permission) bool {
 		return false
 	}
 	for _, p := range perms {
-		if p == permission || p == constants.PermissionAll {
+		if p == permission || p == PermissionAll {
 			return true
 		}
 	}
