@@ -27,6 +27,12 @@ func main() {
 	if err != nil {
 		mtch.Echo.Logger.Fatalf("View initialization failed: %v", err)
 	}
+
+	err = svc.InitialSetup()
+	if err != nil {
+		mtch.Echo.Logger.Fatalf("Initial setup failed: %v", err)
+	}
+
 	err = mtch.Start()
 	if err != nil {
 		mtch.Echo.Logger.Fatalf("Server start failed: %v", err)

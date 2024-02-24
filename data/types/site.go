@@ -15,6 +15,7 @@ type Site struct {
 	Name        string       `json:"name"`
 	Domains     Domains      `gorm:"type:json" json:"domains"`
 	Active      bool         `json:"active"`
+	Mitocho     bool         `json:"mitocho"`
 	AccessToken AccessToken  `json:"access_token"`
 	PublicKey   PasetoKeyHex `json:"public_key"`
 	PrivateKey  PasetoKeyHex `json:"private_key"`
@@ -31,6 +32,26 @@ func NewDomains(domains []string) Domains {
 	return domainsJson
 }
 
+func NewMitochoSite(name string, domain string) *Site {
+	accessToken, err := crypto.GenerateAccessToken()
+	if err != nil {
+		return nil
+	}
+
+	pasetoGen := crypto.NewPasetoGen()
+
+	return &Site{
+		Name:        name,
+		Domains:     NewDomain(domain),
+		Active:      true,
+		Mitocho:     true,
+		AccessToken: AccessToken(accessToken),
+		PublicKey:   PasetoKeyHex(pasetoGen.PublicKeyHex()),
+		PrivateKey:  PasetoKeyHex(pasetoGen.PrivateKeyHex()),
+	}
+
+}
+
 func NewSite(name string, domain string) *Site {
 	accessToken, err := crypto.GenerateAccessToken()
 	if err != nil {
@@ -43,6 +64,7 @@ func NewSite(name string, domain string) *Site {
 		Name:        name,
 		Domains:     NewDomain(domain),
 		Active:      true,
+		Mitocho:     false,
 		AccessToken: AccessToken(accessToken),
 		PublicKey:   PasetoKeyHex(pasetoGen.PublicKeyHex()),
 		PrivateKey:  PasetoKeyHex(pasetoGen.PrivateKeyHex()),

@@ -69,29 +69,19 @@ func (db *Database) Close() error {
 }
 
 func (db *Database) Migrate() error {
-	err := db.Gorm.AutoMigrate(&types.Setting{})
-	if err != nil {
-		return err
+	models := []interface{}{
+		&types.Role{},
+		&types.User{},
+		&types.Setting{},
+		&types.Site{},
+		&types.SiteUser{},
+		&types.SiteRole{},
 	}
-	err = db.Gorm.AutoMigrate(&types.Role{})
-	if err != nil {
-		return err
+
+	for _, model := range models {
+		if err := db.Gorm.AutoMigrate(model); err != nil {
+			return err
+		}
 	}
-	err = db.Gorm.AutoMigrate(&types.User{})
-	if err != nil {
-		return err
-	}
-	err = db.Gorm.AutoMigrate(&types.Site{})
-	if err != nil {
-		return err
-	}
-	err = db.Gorm.AutoMigrate(&types.SiteRole{})
-	if err != nil {
-		return err
-	}
-	err = db.Gorm.AutoMigrate(&types.SiteUser{})
-	if err != nil {
-		return err
-	}
-	return err
+	return nil
 }

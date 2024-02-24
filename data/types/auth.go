@@ -3,6 +3,7 @@ package types
 import (
 	"encoding/json"
 	"github.com/google/uuid"
+	"github.com/yzaimoglu/mitocho/utils/crypto"
 )
 
 type Permission string
@@ -23,6 +24,7 @@ type Role struct {
 	Name         string         `json:"name"`
 	ReadableName string         `json:"readable_name"`
 	Permissions  PermissionJSON `gorm:"type:json" json:"permissions"`
+	Removable    bool           `json:"removable"`
 }
 
 func (r *Role) GetPermissions() ([]Permission, error) {
@@ -55,6 +57,20 @@ type User struct {
 	Role        Role           `json:"role"`
 	RoleID      uuid.UUID      `gorm:"type:char(36)" json:"-"`
 	Permissions PermissionJSON `gorm:"type:json" json:"permissions"`
+}
+
+func NewUser(username, password, email string, roleId uuid.UUID) *User {
+	hashedPassword, err := crypto.HashPassword(password)
+	if err != nil {
+		return nil
+	}
+
+	return &User{
+		Username: username,
+		Password: hashedPassword,
+		Email:    email,
+		RoleID:   roleId,
+	}
 }
 
 func (u *User) GetPermissions() ([]Permission, error) {
