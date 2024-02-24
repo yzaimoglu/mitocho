@@ -13,7 +13,7 @@ type Domains json.RawMessage
 type Site struct {
 	BaseModel
 	Name        string       `json:"name"`
-	Domains     Domains      `json:"domains"`
+	Domains     Domains      `gorm:"type:json" json:"domains"`
 	Active      bool         `json:"active"`
 	AccessToken AccessToken  `json:"access_token"`
 	PublicKey   PasetoKeyHex `json:"public_key"`
@@ -21,13 +21,14 @@ type Site struct {
 }
 
 func NewDomain(domain string) Domains {
-	domainJson, _ := json.Marshal([]string{domain})
-	return Domains(domainJson)
+	domains := []string{domain}
+	domainJson, _ := json.Marshal(domains)
+	return domainJson
 }
 
 func NewDomains(domains []string) Domains {
 	domainsJson, _ := json.Marshal(domains)
-	return Domains(domainsJson)
+	return domainsJson
 }
 
 func NewSite(name string, domain string) *Site {
