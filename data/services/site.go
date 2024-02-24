@@ -71,7 +71,7 @@ func (svc *Service) GetSiteByName(name string) (*types.Site, error) {
 
 func (svc *Service) GetSiteByDomain(domain string) (*types.Site, error) {
 	site := &types.Site{}
-	tx := svc.DB.Gorm.Where("JSON_CONTAINS(domains, ?, '$'", `"`+domain+`"`).First(site)
+	tx := svc.DB.Gorm.Where("JSON_CONTAINS(domains, ?, '$')", `"`+domain+`"`).First(site)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
