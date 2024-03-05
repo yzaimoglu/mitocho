@@ -16,7 +16,7 @@
   </p>
 </p>
 
-![Downloads](https://img.shields.io/github/downloads/yzaimoglu/mitocho/total) ![Contributors](https://img.shields.io/github/contributors/yzaimoglu/mitocho?color=dark-green) ![Issues](https://img.shields.io/github/issues/yzaimoglu/mitocho) ![License](https://img.shields.io/github/license/yzaimoglu/mitocho) 
+![Contributors](https://img.shields.io/github/contributors/yzaimoglu/mitocho?color=dark-green) ![Issues](https://img.shields.io/github/issues/yzaimoglu/mitocho) ![License](https://img.shields.io/github/license/yzaimoglu/mitocho) 
 
 ## Table Of Contents
 
@@ -24,7 +24,6 @@
 * [Built With](#built-with)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
-* [Usage](#usage)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -71,12 +70,6 @@ This is an example of how to list things you need to use the software and how to
 Installation instructions will follow
 ```
 
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
 ## Roadmap
 
 See the [open issues](https://github.com/yzaimoglu/mitocho/issues) for a list of proposed features (and known issues).
@@ -95,7 +88,7 @@ We appreciate everyone who wants to contribute. In order to do so take a look at
 
 ## License
 
-Distributed under the BSD-3 License. See [LICENSE](https://github.com/yzaimoglu/mitocho/blob/main/LICENSE.md) for more information.
+Distributed under the BSD-3 License. See [LICENSE](https://github.com/yzaimoglu/mitocho/blob/master/LICENSE) for more information.
 
 ## Acknowledgements
 
