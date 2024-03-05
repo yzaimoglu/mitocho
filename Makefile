@@ -1,7 +1,10 @@
 TARGET = ./bin/mitocho
 
-.PHONY: run clean templ tailwind build
+.PHONY: run clean templ tailwind build git-push
 
+git-push:
+	@templ generate
+	
 dev:
 	@go run mitocho.go
 
