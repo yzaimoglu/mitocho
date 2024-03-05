@@ -2,9 +2,11 @@ package controller
 
 import (
 	"fmt"
+	"net/http"
+
 	"github.com/labstack/echo/v4"
 	"github.com/yzaimoglu/mitocho/templ/health"
-	"net/http"
+	"github.com/yzaimoglu/mitocho/templ/layout"
 )
 
 func (ctrl *Controller) GetApiHealth(c echo.Context) error {
@@ -15,7 +17,7 @@ func (ctrl *Controller) GetApiHealth(c echo.Context) error {
 
 func (ctrl *Controller) GetViewHealth(c echo.Context) error {
 	return ctrl.View(c,
-		health.ShowIndex("test", "wow", health.Show("hey")))
+		layout.BaseView("test", "wow", health.Show("hey")))
 }
 
 func (ctrl *Controller) GetViewHealthRequest(c echo.Context) error {

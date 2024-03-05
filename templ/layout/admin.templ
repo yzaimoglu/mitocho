@@ -1,9 +1,15 @@
 package layout
 
-templ Admin(title, description string, alpine bool) {
-	@Base(title, description, alpine) {
+templ Admin(title, description string, alpine, flowbite bool) {
+	@Base(title, description, alpine, flowbite) {
 		<div>
 			{ children... }
 		</div>
+	}
+}
+
+templ AdminView(title, description string, cmp templ.Component) {
+	@Admin(title, description, true, true) {
+		@cmp
 	}
 }

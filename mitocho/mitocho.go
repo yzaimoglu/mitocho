@@ -43,6 +43,7 @@ func NewMitocho(db *config.Database) *Mitocho {
 	}))
 	e.Static("/static", "templ/static")
 	e.Static("/assets", "templ/static/assets")
+	e.File("/static/flowbite.min.js", "node_modules/flowbite/dist/flowbite.min.js")
 	e.HideBanner = true
 
 	return &Mitocho{

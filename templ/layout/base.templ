@@ -4,10 +4,10 @@ import (
 	"github.com/yzaimoglu/mitocho/templ/components"
 )
 
-templ Base(title, description string, alpine bool) {
+templ Base(title, description string, alpine, flowbite bool) {
 	<!DOCTYPE html>
 	<html lang="en" data-theme="light">
-		@Head(title, description, alpine)
+		@Head(title, description, alpine, flowbite)
 		<body>
 			@components.Header()
 			<main class="container mx-auto">
@@ -18,7 +18,7 @@ templ Base(title, description string, alpine bool) {
 	</html>
 }
 
-templ Head(title, description string, alpine bool) {
+templ Head(title, description string, alpine, flowbite bool) {
 	<head>
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -27,6 +27,15 @@ templ Head(title, description string, alpine bool) {
 		if alpine {
 			<script src="https://unpkg.com/alpinejs" defer></script>
 		}
+		if flowbite {
+			<script src="/static/flowbite.min.js"></script>
+		}
 		<title>{ title }</title>
 	</head>
+}
+
+templ BaseView(title, description string, cmp templ.Component) {
+	@Base(title, description, true, true) {
+		@cmp
+	}	
 }

@@ -1,15 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-html{
-    @apply relative scroll-smooth;
-}
-
-body{
-    @apply overflow-x-hidden bg-base-100 text-sm text-base-content antialiased;
-}
-
-:target {
-    @apply lg:scroll-mt-0 scroll-m-12
-}
