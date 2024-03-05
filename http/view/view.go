@@ -19,6 +19,7 @@ func NewView(mitocho *mitocho.Mitocho, controller *controller.Controller) *View 
 
 func (view *View) Init() error {
 	viewMain := view.Mitocho.Echo.Group("/")
+	view.GetHomeViewRoutes(viewMain)
 	view.GetHealthViewRoutes(viewMain)
 	return nil
 }

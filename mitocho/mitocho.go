@@ -42,6 +42,7 @@ func NewMitocho(db *config.Database) *Mitocho {
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
 	e.Static("/static", "templ/static")
+	e.Static("/assets", "templ/static/assets")
 	e.HideBanner = true
 
 	return &Mitocho{
@@ -84,7 +85,7 @@ func (mitocho *Mitocho) Start() error {
 	go func() {
 		defer wg.Done()
 		if err := mitocho.StartHTTP(); !errors.Is(err, http.ErrServerClosed) {
-			mitocho.Echo.Logger.Fatalf("Error when starting HTTP server: %w", err)
+			mitocho.Echo.Logger.Fatalf("Error when starting HTTP server: %v", err.Error)
 		} else {
 			mitocho.Echo.Logger.Info("HTTP server stopped")
 		}
@@ -96,7 +97,7 @@ func (mitocho *Mitocho) Start() error {
 		go func() {
 			defer wg.Done()
 			if err := mitocho.StartHTTPS(); !errors.Is(err, http.ErrServerClosed) {
-				mitocho.Echo.Logger.Fatalf("Error when starting HTTPS server: %w", err)
+				mitocho.Echo.Logger.Fatalf("Error when starting HTTPS server: %v", err.Error)
 			} else {
 				mitocho.Echo.Logger.Info("HTTPS server stopped")
 			}
@@ -112,7 +113,7 @@ func (mitocho *Mitocho) Start() error {
 		timeout, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 		if err := mitocho.Echo.Server.Shutdown(timeout); !errors.Is(err, http.ErrServerClosed) {
-			mitocho.Echo.Logger.Fatalf("Error when shutting down HTTPS server: %v", err)
+			mitocho.Echo.Logger.Fatalf("Error when shutting down HTTPS server: %v", err.Error)
 		} else {
 			mitocho.Echo.Logger.Info("HTTPS server shutdown")
 		}

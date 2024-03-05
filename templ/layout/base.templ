@@ -1,13 +1,19 @@
 package layout
 
+import (
+	"github.com/yzaimoglu/mitocho/templ/components"
+)
+
 templ Base(title, description string, alpine bool) {
 	<!DOCTYPE html>
-	<html lang="en">
+	<html lang="en" data-theme="light">
 		@Head(title, description, alpine)
-		<body class="">
-			<main>
+		<body>
+			@components.Header()
+			<main class="container mx-auto">
 				{ children... }
 			</main>
+			@components.Footer()
 		</body>
 	</html>
 }
@@ -19,7 +25,7 @@ templ Head(title, description string, alpine bool) {
 		<meta name="description" content={ description }/>
 		<link href="/static/main.css" rel="stylesheet"/>
 		if alpine {
-			<script src="//unpkg.com/alpinejs" defer></script>
+			<script src="https://unpkg.com/alpinejs" defer></script>
 		}
 		<title>{ title }</title>
 	</head>

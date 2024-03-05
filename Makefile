@@ -1,4 +1,9 @@
-TARGET = bin/mitocho.exe
+TARGET = ./bin/mitocho
+
+.PHONY: run clean templ tailwind build
+
+dev:
+	@go run mitocho.go
 
 run: build
 	@./$(TARGET)
