@@ -7,7 +7,7 @@
   <h3 align="center">Mitocho</h3>
 
   <p align="center">
-    The powerhouse of automation
+    The powerhouse of authentication
     <br/>
     <br/>
     <a href="https://github.com/yzaimoglu/mitocho/issues">Report Bug</a>
