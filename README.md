@@ -33,8 +33,6 @@
 
 ![Screen Shot](.github/images/screenshot.png)
 
-# Authentication Project README
-
 Creating secure, efficient, and scalable authentication and authorization solutions from scratch can be a daunting and time-consuming task for developers. Recognizing this challenge, we've developed an authentication project designed to significantly simplify the integration of authentication and authorization mechanisms into your applications. This project is born out of the realization that developers spend an excessive amount of time reinventing the wheel for authentication flows, which detracts from focusing on the unique aspects of their own projects.
 
 Here's why this authentication project is a game-changer for your development workflow:
