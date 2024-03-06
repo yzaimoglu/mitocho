@@ -1,5 +1,20 @@
 package health
 
+import "github.com/yzaimoglu/mitocho/templ/components"
+
 templ Show(name string) {
-	<div>Hello dsd how are you fasfa dsadad dsad, { name }</div>
+	<div class="flex justify-center gap-2">
+		@components.Button("dark", &components.ButtonParams{
+			BType: components.BTypeDark,
+		})
+		@components.Button("alternative", &components.ButtonParams{
+			BType: components.BTypeAlternative,
+		})
+		@components.Button("custom", &components.ButtonParams{
+			BType: components.BTypeCustom,
+			BSize: components.BSizeXl,
+			BColor: components.BColorGreen,
+			BText: components.BTextWhite,
+		})
+	</div>
 }
