@@ -50,6 +50,24 @@ func Show(name string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
+		templ_7745c5c3_Err = components.Button("custom", &components.ButtonParams{
+			BType:  components.BTypeCustom,
+			BSize:  components.BSizeSm,
+			BColor: components.BColorRed,
+			BText:  components.BTextWhite,
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.Button("custom", &components.ButtonParams{
+			BType:  components.BTypeCustom,
+			BSize:  components.BSizeXs,
+			BColor: components.BColorPurple,
+			BText:  components.BTextWhite,
+		}).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

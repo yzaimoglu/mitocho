@@ -11,10 +11,22 @@ templ Show(name string) {
 			BType: components.BTypeAlternative,
 		})
 		@components.Button("custom", &components.ButtonParams{
-			BType: components.BTypeCustom,
-			BSize: components.BSizeXl,
+			BType:  components.BTypeCustom,
+			BSize:  components.BSizeXl,
 			BColor: components.BColorGreen,
-			BText: components.BTextWhite,
+			BText:  components.BTextWhite,
+		})
+		@components.Button("custom", &components.ButtonParams{
+			BType:  components.BTypeCustom,
+			BSize:  components.BSizeSm,
+			BColor: components.BColorRed,
+			BText:  components.BTextWhite,
+		})
+		@components.Button("custom", &components.ButtonParams{
+			BType:  components.BTypeCustom,
+			BSize:  components.BSizeXs,
+			BColor: components.BColorPurple,
+			BText:  components.BTextWhite,
 		})
 	</div>
 }
