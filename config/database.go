@@ -72,6 +72,7 @@ func (db *Database) Migrate() error {
 	models := []interface{}{
 		&types.Role{},
 		&types.User{},
+		&types.UserRole{},
 		&types.Setting{},
 		&types.Site{},
 		&types.SiteUser{},

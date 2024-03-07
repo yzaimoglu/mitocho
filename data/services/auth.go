@@ -72,7 +72,8 @@ func (svc *Service) UserCount() (int64, error) {
 func (svc *Service) GetUserByUUID(uuid uuid.UUID) (*types.User, error) {
 	user := &types.User{}
 	tx := svc.DB.Gorm.Where("id = ?", uuid.String()).
-		Preload("Role").
+		Preload("Roles").
+		Preload("Roles.Role").
 		First(user)
 	if tx.Error != nil {
 		return nil, tx.Error
@@ -84,7 +85,8 @@ func (svc *Service) GetUserByUUID(uuid uuid.UUID) (*types.User, error) {
 func (svc *Service) GetUserByEmail(email string) (*types.User, error) {
 	user := &types.User{}
 	tx := svc.DB.Gorm.Where("email = ?", email).
-		Preload("Role").
+		Preload("Roles").
+		Preload("Roles.Role").
 		First(user)
 	if tx.Error != nil {
 		return nil, tx.Error
