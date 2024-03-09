@@ -1,7 +1,11 @@
 package utils
 
 import (
+	"bytes"
+	"encoding/base64"
+	"encoding/gob"
 	"encoding/json"
+	"log"
 )
 
 func ToJson(source interface{}) []byte {
@@ -46,4 +50,25 @@ func InterfaceToObject(input interface{}, output interface{}) error {
 	}
 
 	return nil
+}
+
+func ToBase64(data interface{}) (string, error) {
+	var buf bytes.Buffer
+	enc := gob.NewEncoder(&buf)
+	err := enc.Encode(data)
+	if err != nil {
+		return "", err
+	}
+	returnString := base64.StdEncoding.EncodeToString(buf.Bytes())
+	return returnString, nil
+}
+
+func FromBase64(str string, target interface{}) error {
+	data, err := base64.StdEncoding.DecodeString(str)
+	if err != nil {
+		log.Fatalf("Decode error: %v", err)
+	}
+	buf := bytes.NewBuffer(data)
+	dec := gob.NewDecoder(buf)
+	return dec.Decode(target)
 }

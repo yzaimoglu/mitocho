@@ -1,8 +1,9 @@
 package crypto
 
 import (
-	"aidanwoods.dev/go-paseto"
 	"time"
+
+	"aidanwoods.dev/go-paseto"
 )
 
 type Subject string
