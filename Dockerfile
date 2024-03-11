@@ -1,5 +1,5 @@
 # Static files.
-FROM node:16.15.0-alpine3.15 as frontend-builder
+FROM node:20.11.1-alpine as frontend-builder
 WORKDIR /builder
 COPY /frontend/package.json /frontend/package-lock.json ./
 RUN npm ci
