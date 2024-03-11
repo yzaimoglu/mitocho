@@ -4,16 +4,18 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
-	"github.com/yzaimoglu/mitocho/config"
-	"github.com/yzaimoglu/mitocho/utils/crypto"
 	"net/http"
 	"os"
 	"os/signal"
 	"sync"
 	"syscall"
 	"time"
+
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
+	"github.com/yzaimoglu/mitocho/config"
+	"github.com/yzaimoglu/mitocho/frontend"
+	"github.com/yzaimoglu/mitocho/utils/crypto"
 )
 
 type Mitocho struct {
@@ -24,6 +26,7 @@ type Mitocho struct {
 
 func NewMitocho(db *config.Database) *Mitocho {
 	e := echo.New()
+
 	e.Validator = config.NewValidator()
 	if !config.Debug() {
 		e.Use(middleware.HTTPSRedirect())
@@ -41,9 +44,15 @@ func NewMitocho(db *config.Database) *Mitocho {
 		AllowOrigins: []string{"*"},
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
-	e.Static("/static", "templ/static")
-	e.Static("/assets", "templ/static/assets")
+	e.Static("/static", "static")
+	e.Static("/assets", "static/assets")
 	e.HideBanner = true
+
+	// Frontend
+	e.Use(middleware.StaticWithConfig(middleware.StaticConfig{
+		Filesystem: frontend.BuildHTTPFS(),
+		HTML5:      true,
+	}))
 
 	return &Mitocho{
 		Echo:  e,

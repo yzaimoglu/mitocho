@@ -1,28 +1,8 @@
-package layout
-
-import (
-	"github.com/yzaimoglu/mitocho/templ/components"
-)
-
-templ Base(title, description string, alpine, flowbite bool) {
-	<!DOCTYPE html>
-	<html lang="en" data-theme="light">
-		@Head(title, description, alpine, flowbite)
-		<body>
-			@components.Header()
-			<main class="container mx-auto">
-				{ children... }
-			</main>
-			@components.Footer()
-		</body>
-	</html>
-}
-
-templ Head(title, description string, alpine, flowbite bool) {
+<!doctype html>
+<html lang="en">
 	<head>
-		<meta charset="UTF-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta name="description" content={ description }/>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link href="/static/main.css" rel="stylesheet"/>
 		<link rel="apple-touch-icon" sizes="60x60" href="/static/apple-icon-60x60.png"/>
 		<link rel="apple-touch-icon" sizes="72x72" href="/static/apple-icon-72x72.png"/>
@@ -40,18 +20,9 @@ templ Head(title, description string, alpine, flowbite bool) {
 		<meta name="msapplication-TileColor" content="#ffffff"/>
 		<meta name="msapplication-TileImage" content="/static/ms-icon-144x144.png"/>
 		<meta name="theme-color" content="#ffffff"/>
-		if alpine {
-			<script src="https://unpkg.com/alpinejs" defer></script>
-		}
-		if flowbite {
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-		}
-		<title>{ title }</title>
+		%sveltekit.head%
 	</head>
-}
-
-templ BaseView(title, description string, cmp templ.Component) {
-	@Base(title, description, true, true) {
-		@cmp
-	}
-}
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>

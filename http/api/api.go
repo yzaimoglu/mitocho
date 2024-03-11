@@ -20,7 +20,6 @@ func NewApi(mitocho *mitocho.Mitocho, controller *controller.Controller) *Api {
 func (api *Api) Init() error {
 	apiV1 := api.Mitocho.Echo.Group("/api/v1/")
 	api.GetAuthApiRoutes(apiV1)
-	api.GetHealthApiRoutes(apiV1)
 	api.GetSiteApiRoutes(apiV1)
 	return nil
 }
