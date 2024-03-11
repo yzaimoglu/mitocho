@@ -12,7 +12,7 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . /app
-COPY --from=frontend-builder /app/build ./builder/build/
+COPY --from=frontend-builder /builder/build ./frontend/build/
 RUN CGO_ENABLED=0 GOOS=linux go build -o /entrypoint
 
 # Deploy.
