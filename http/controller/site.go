@@ -1,9 +1,11 @@
 package controller
 
 import (
+	"net/http"
+
 	"github.com/labstack/echo/v4"
 	"github.com/yzaimoglu/mitocho/data/types"
-	"net/http"
+	"github.com/yzaimoglu/mitocho/utils/crypto"
 )
 
 func (ctrl *Controller) GetAPISitePublicKey(c echo.Context) error {
@@ -21,7 +23,9 @@ func (ctrl *Controller) GetAPISitePublicKey(c echo.Context) error {
 		return ctrl.Error(http.StatusUnauthorized, "invalid access token")
 	}
 
+	pasetoGen := crypto.FromPrivateKey(string(site.PrivateKey))
+
 	return c.JSON(http.StatusOK, types.JSON{
-		"public_key": site.PublicKey,
+		"public_key": pasetoGen.ExportPublicKey(),
 	})
 }

@@ -1,6 +1,7 @@
 package crypto
 
 import (
+	"encoding/base64"
 	"time"
 
 	"aidanwoods.dev/go-paseto"
@@ -37,6 +38,12 @@ func FromPrivateKey(privateKeyHex string) *PasetoGen {
 		PublicKey:  publicKey,
 	}
 	return p
+}
+
+func (p *PasetoGen) ExportPublicKey() string {
+	pk := p.PublicKey.ExportBytes()
+	base64PubKey := base64.StdEncoding.EncodeToString(pk)
+	return base64PubKey
 }
 
 func (p *PasetoGen) Generate() {
