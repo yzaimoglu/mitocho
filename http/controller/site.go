@@ -25,7 +25,7 @@ func (ctrl *Controller) GetAPISitePublicKey(c echo.Context) error {
 
 	pasetoGen := crypto.FromPrivateKey(string(site.PrivateKey))
 
-	return c.JSON(http.StatusOK, types.JSON{
+	return ctrl.Success(c, types.JSON{
 		"public_key": pasetoGen.ExportPublicKey(),
 	})
 }
