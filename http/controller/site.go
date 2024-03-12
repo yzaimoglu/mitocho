@@ -8,8 +8,8 @@ import (
 	"github.com/yzaimoglu/mitocho/utils/crypto"
 )
 
-func (ctrl *Controller) GetAPISitePublicKey(c echo.Context) error {
-	var req types.GetSitePublicKeyRequest
+func (ctrl *Controller) PostAPISitePublicKey(c echo.Context) error {
+	var req types.PostSitePublicKeyRequest
 	if c.Bind(&req) != nil {
 		return ctrl.Error(http.StatusBadRequest, "invalid request")
 	}

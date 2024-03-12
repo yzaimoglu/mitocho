@@ -11,6 +11,6 @@ type PostLoginTOTPRequest struct {
 	TOTP string `json:"totp" validate:"required"`
 }
 
-type GetSitePublicKeyRequest struct {
+type PostSitePublicKeyRequest struct {
 	AccessToken string `json:"access_token" validate:"required"`
 }
