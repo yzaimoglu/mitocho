@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { getPayload } from '$lib/paseto'
+	import { getPayload } from '$lib/paseto';
 
 	onMount(async () => {
 		const access_token =
@@ -11,3 +11,16 @@
 		console.log(verified);
 	});
 </script>
+
+<div class="bg-green-100">
+	<div class="flex flex-col justify-center items-center h-screen gap-2">
+		<img
+			class="w-32"
+			src="/assets/logo.png"
+		/>
+		<div class="text-center">
+			<h1 class="text-2xl font-bold">Mitocho</h1>
+			<p class="text-lg">The powerhouse of authentication</p>
+		</div>
+	</div>
+</div>
