@@ -44,8 +44,6 @@ func NewMitocho(db *config.Database) *Mitocho {
 		AllowOrigins: []string{"*"},
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
-	e.Static("/static", "static")
-	e.Static("/assets", "static/assets")
 	e.HideBanner = true
 
 	// Frontend
