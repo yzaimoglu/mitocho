@@ -2,12 +2,16 @@ package config
 
 import (
 	"fmt"
-	"github.com/yzaimoglu/mitocho/data/types"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
+	"log"
 	"net/url"
 	"os"
 	"strings"
+	"time"
+
+	"github.com/yzaimoglu/mitocho/data/types"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 type Database struct {
@@ -52,7 +56,18 @@ func (db *Database) Connect() {
 	if err != nil {
 		panic("Could not convert dsn to mysql format")
 	}
-	database, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	database, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+		Logger: logger.New(
+			log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
+			logger.Config{
+				SlowThreshold:             time.Second,   // Slow SQL threshold
+				LogLevel:                  logger.Silent, // Log level
+				IgnoreRecordNotFoundError: true,          // Ignore ErrRecordNotFound error for logger
+				ParameterizedQueries:      false,         // Don't include params in the SQL log
+				Colorful:                  true,          // Disable color
+			},
+		),
+	})
 	if err != nil {
 		panic("Failed to connect to database")
 	}
