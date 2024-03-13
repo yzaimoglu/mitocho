@@ -39,9 +39,9 @@ func NewMitocho(db *config.Database) *Mitocho {
 	e.Use(middleware.Logger())
 	e.Use(middleware.RequestID())
 	e.Use(middleware.Recover())
-	if !config.Debug() {
-		e.Use(middleware.CSRF())
-	}
+	// if !config.Debug() {
+	// 	e.Use(middleware.CSRF())
+	// }
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"*"},
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
