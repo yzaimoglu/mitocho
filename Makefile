@@ -1,6 +1,9 @@
 TARGET = ./bin/mitocho
 
-.PHONY: run clean build fdev bdev fbuild bbuild
+.PHONY: run clean build fdev bdev fbuild bbuild prod
+
+prod: build
+	$(TARGET)
 
 fdev:
 	@npm run dev --prefix ./frontend
