@@ -1,5 +1,7 @@
 package types
 
+import "github.com/google/uuid"
+
 const (
 	SettingNameSetupFinished = "setup_finished"
 	SettingNameSiteLogo      = "site_logo"
@@ -8,6 +10,9 @@ const (
 
 type Setting struct {
 	BaseModel
-	Name  string `json:"name"`
-	Value string `json:"value"`
+	Global bool       `json:"global"`
+	SiteId *uuid.UUID `gorm:"type:char(36)" json:"-"`
+	Site   *Site      `json:"site"`
+	Name   string     `json:"name"`
+	Value  string     `json:"value"`
 }

@@ -8,26 +8,23 @@ import (
 func (svc *Service) DoesMitochoSiteExist() bool {
 	site := &types.Site{}
 	tx := svc.DB.Gorm.Where("mitocho = ?", true).First(site)
-	if tx.Error != nil {
-		return false
-	}
-	return true
+	return tx.Error == nil
 }
 
-func (svc *Service) CreateInitialSite(name string, domain string) error {
+func (svc *Service) CreateInitialSite(name string, domain string) (uuid.UUID, error) {
 	if !svc.IsSetupFinished() && !svc.DoesMitochoSiteExist() {
 		site := types.NewMitochoSite(name, domain)
 		tx := svc.DB.Gorm.Create(site)
 		if tx.Error != nil {
-			return tx.Error
+			return uuid.UUID{}, tx.Error
 		}
-		return nil
+		return site.ID, nil
 	}
-	return nil
+	return uuid.UUID{}, nil
 }
 
-func (svc *Service) CreateSiteIfNotExists(name string, domain string) error {
-	site := types.NewSite(name, domain, "", "")
+func (svc *Service) CreateSiteIfNotExists(name string, domain string, imprint string, privacyPolicy string) error {
+	site := types.NewSite(name, domain, imprint, privacyPolicy)
 	tx := svc.DB.Gorm.Where("name = ?", name).First(site)
 	if tx.Error != nil {
 		tx = svc.DB.Gorm.Create(site)

@@ -2,6 +2,7 @@ package types
 
 import (
 	"encoding/json"
+
 	"github.com/google/uuid"
 	"github.com/yzaimoglu/mitocho/utils/crypto"
 )
@@ -28,6 +29,8 @@ func CreatePermissionsJSON(perms []Permission) PermissionJSON {
 
 type Role struct {
 	BaseModel
+	Site         Site           `json:"site"`
+	SiteId       uuid.UUID      `gorm:"type:char(36)" json:"-"`
 	Name         string         `json:"name"`
 	ReadableName string         `json:"readable_name"`
 	Permissions  PermissionJSON `gorm:"type:json" json:"permissions"`
@@ -62,6 +65,8 @@ func (r *Role) HasPermission(permission Permission) bool {
 
 type User struct {
 	BaseModel
+	Site        Site           `json:"site"`
+	SiteId      uuid.UUID      `gorm:"type:char(36)" json:"-"`
 	Username    string         `json:"username"`
 	Password    string         `json:"password"`
 	Email       string         `json:"email"`
@@ -69,13 +74,14 @@ type User struct {
 	Permissions PermissionJSON `gorm:"type:json" json:"permissions"`
 }
 
-func NewUser(username, password, email string, roleId uuid.UUID) *User {
+func NewUser(siteId uuid.UUID, username, password, email string, roleId uuid.UUID) *User {
 	hashedPassword, err := crypto.HashPassword(password)
 	if err != nil {
 		return nil
 	}
 
 	return &User{
+		SiteId:   siteId,
 		Username: username,
 		Password: hashedPassword,
 		Email:    email,

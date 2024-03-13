@@ -17,9 +17,9 @@ var (
 	}
 )
 
-func (svc *Service) GetAdminRole() (*types.Role, error) {
+func (svc *Service) GetAdminRole(siteId uuid.UUID) (*types.Role, error) {
 	role := &types.Role{}
-	tx := svc.DB.Gorm.Where("name = ?", "admin").First(role)
+	tx := svc.DB.Gorm.Where("site_id = ? AND name = ?", siteId, "admin").First(role)
 	if tx.Error != nil {
 		return nil, tx.Error
 	}
@@ -27,12 +27,12 @@ func (svc *Service) GetAdminRole() (*types.Role, error) {
 	return role, nil
 }
 
-func (svc *Service) CreateInitialRoles() error {
+func (svc *Service) CreateInitialRoles(siteId uuid.UUID) error {
 	for _, role := range InitialRoles {
+		role.SiteId = siteId
 		if err := svc.CreateRoleIfNotExists(&role); err != nil {
 			return err
 		}
-		return nil
 	}
 	return nil
 }
@@ -40,10 +40,7 @@ func (svc *Service) CreateInitialRoles() error {
 func (svc *Service) RoleWithNameExists(name string) bool {
 	role := &types.Role{}
 	tx := svc.DB.Gorm.Where("name = ?", name).First(role)
-	if tx.Error != nil {
-		return false
-	}
-	return true
+	return tx.Error == nil
 }
 
 func (svc *Service) CreateRoleIfNotExists(role *types.Role) error {

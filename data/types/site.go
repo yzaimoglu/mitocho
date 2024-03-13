@@ -2,7 +2,6 @@ package types
 
 import (
 	"encoding/json"
-	"github.com/google/uuid"
 	"github.com/yzaimoglu/mitocho/utils/crypto"
 )
 
@@ -43,15 +42,16 @@ func NewMitochoSite(name string, domain string) *Site {
 	pasetoGen := crypto.NewPasetoGen()
 
 	return &Site{
-		Name:        name,
-		Domains:     NewDomain(domain),
-		Active:      true,
-		Mitocho:     true,
-		AccessToken: AccessToken(accessToken),
-		PublicKey:   PasetoKeyHex(pasetoGen.PublicKeyHex()),
-		PrivateKey:  PasetoKeyHex(pasetoGen.PrivateKeyHex()),
+		Name:          name,
+		Domains:       NewDomain(domain),
+		Active:        true,
+		Mitocho:       true,
+		AccessToken:   AccessToken(accessToken),
+		PublicKey:     PasetoKeyHex(pasetoGen.PublicKeyHex()),
+		PrivateKey:    PasetoKeyHex(pasetoGen.PrivateKeyHex()),
+		PrivacyPolicy: "/privacy",
+		Imprint:       "/imprint",
 	}
-
 }
 
 func NewSite(name string, privacyPolicy string, imprint string, domain string) *Site {
@@ -94,16 +94,4 @@ func NewSiteGroup(name string, privacyPolicy string, imprint string, domains ...
 		PublicKey:     PasetoKeyHex(pasetoGen.PublicKeyHex()),
 		PrivateKey:    PasetoKeyHex(pasetoGen.PrivateKeyHex()),
 	}
-}
-
-type SiteRole struct {
-	Role
-	Site   Site      `json:"site"`
-	SiteID uuid.UUID `gorm:"type:char(36)" json:"-"`
-}
-
-type SiteUser struct {
-	User
-	Site   Site      `json:"site"`
-	SiteID uuid.UUID `gorm:"type:char(36)" json:"-"`
 }

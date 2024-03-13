@@ -6,7 +6,7 @@ import (
 
 var (
 	InitialSettings = []types.Setting{
-		{Name: types.SettingNameSetupFinished, Value: "0"},
+		{Global: true, Name: types.SettingNameSetupFinished, Value: "0"},
 	}
 )
 

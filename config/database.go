@@ -73,10 +73,8 @@ func (db *Database) Migrate() error {
 		&types.Role{},
 		&types.User{},
 		&types.UserRole{},
-		&types.Setting{},
 		&types.Site{},
-		&types.SiteUser{},
-		&types.SiteRole{},
+		&types.Setting{},
 	}
 
 	for _, model := range models {
