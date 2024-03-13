@@ -27,7 +27,7 @@ func (svc *Service) CreateInitialSite(name string, domain string) error {
 }
 
 func (svc *Service) CreateSiteIfNotExists(name string, domain string) error {
-	site := types.NewSite(name, domain)
+	site := types.NewSite(name, domain, "", "")
 	tx := svc.DB.Gorm.Where("name = ?", name).First(site)
 	if tx.Error != nil {
 		tx = svc.DB.Gorm.Create(site)

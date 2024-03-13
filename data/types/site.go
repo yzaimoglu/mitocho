@@ -12,13 +12,15 @@ type Domains json.RawMessage
 
 type Site struct {
 	BaseModel
-	Name        string       `json:"name"`
-	Domains     Domains      `gorm:"type:json" json:"domains"`
-	Active      bool         `json:"active"`
-	Mitocho     bool         `json:"mitocho"`
-	AccessToken AccessToken  `json:"access_token"`
-	PublicKey   PasetoKeyHex `json:"public_key"`
-	PrivateKey  PasetoKeyHex `json:"private_key"`
+	Name          string       `json:"name"`
+	Domains       Domains      `gorm:"type:json" json:"domains"`
+	Active        bool         `json:"active"`
+	Mitocho       bool         `json:"mitocho"`
+	PrivacyPolicy string       `json:"privacy_policy"`
+	Imprint       string       `json:"imprint"`
+	AccessToken   AccessToken  `json:"access_token"`
+	PublicKey     PasetoKeyHex `json:"public_key"`
+	PrivateKey    PasetoKeyHex `json:"private_key"`
 }
 
 func NewDomain(domain string) Domains {
@@ -52,7 +54,7 @@ func NewMitochoSite(name string, domain string) *Site {
 
 }
 
-func NewSite(name string, domain string) *Site {
+func NewSite(name string, privacyPolicy string, imprint string, domain string) *Site {
 	accessToken, err := crypto.GenerateAccessToken()
 	if err != nil {
 		return nil
@@ -61,17 +63,19 @@ func NewSite(name string, domain string) *Site {
 	pasetoGen := crypto.NewPasetoGen()
 
 	return &Site{
-		Name:        name,
-		Domains:     NewDomain(domain),
-		Active:      true,
-		Mitocho:     false,
-		AccessToken: AccessToken(accessToken),
-		PublicKey:   PasetoKeyHex(pasetoGen.PublicKeyHex()),
-		PrivateKey:  PasetoKeyHex(pasetoGen.PrivateKeyHex()),
+		Name:          name,
+		Domains:       NewDomain(domain),
+		Active:        true,
+		Mitocho:       false,
+		PrivacyPolicy: privacyPolicy,
+		Imprint:       imprint,
+		AccessToken:   AccessToken(accessToken),
+		PublicKey:     PasetoKeyHex(pasetoGen.PublicKeyHex()),
+		PrivateKey:    PasetoKeyHex(pasetoGen.PrivateKeyHex()),
 	}
 }
 
-func NewSiteGroup(name string, domains ...string) *Site {
+func NewSiteGroup(name string, privacyPolicy string, imprint string, domains ...string) *Site {
 	accessToken, err := crypto.GenerateAccessToken()
 	if err != nil {
 		return nil
@@ -80,12 +84,15 @@ func NewSiteGroup(name string, domains ...string) *Site {
 	pasetoGen := crypto.NewPasetoGen()
 
 	return &Site{
-		Name:        name,
-		Domains:     NewDomains(domains),
-		Active:      true,
-		AccessToken: AccessToken(accessToken),
-		PublicKey:   PasetoKeyHex(pasetoGen.PublicKeyHex()),
-		PrivateKey:  PasetoKeyHex(pasetoGen.PrivateKeyHex()),
+		Name:          name,
+		Domains:       NewDomains(domains),
+		Active:        true,
+		Mitocho:       false,
+		PrivacyPolicy: privacyPolicy,
+		Imprint:       imprint,
+		AccessToken:   AccessToken(accessToken),
+		PublicKey:     PasetoKeyHex(pasetoGen.PublicKeyHex()),
+		PrivateKey:    PasetoKeyHex(pasetoGen.PrivateKeyHex()),
 	}
 }
 
