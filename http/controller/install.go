@@ -17,6 +17,10 @@ func (ctrl *Controller) PostAPIInstallFinish(c echo.Context) error {
 		return ctrl.BadRequest(c, errors.New("invalid request"))
 	}
 
+	if req.Password != req.PasswordRepeat {
+		return ctrl.BadRequest(c, errors.New("passwords do not match"))
+	}
+
 	if ctrl.Svc.IsSetupFinished() {
 		return ctrl.Forbidden(c, errors.New("setup already finished"))
 	}
