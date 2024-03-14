@@ -8,9 +8,7 @@
 	import { onMount } from 'svelte';
 
 	onMount(async () => {
-		console.log($loading);
 		loading.finish();
-		console.log($loading);
 	});
 
 	// onMount(async () => {
