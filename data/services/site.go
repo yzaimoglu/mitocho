@@ -23,8 +23,8 @@ func (svc *Service) CreateInitialSite(name string, domain string) (uuid.UUID, er
 	return uuid.UUID{}, nil
 }
 
-func (svc *Service) CreateSiteIfNotExists(name string, domain string, imprint string, privacyPolicy string) error {
-	site := types.NewSite(name, domain, imprint, privacyPolicy)
+func (svc *Service) CreateSiteIfNotExists(name string, privacyPolicy string, imprint string, domain string, callback string) error {
+	site := types.NewSite(name, privacyPolicy, imprint, domain, callback)
 	tx := svc.DB.Gorm.Where("name = ?", name).First(site)
 	if tx.Error != nil {
 		tx = svc.DB.Gorm.Create(site)
