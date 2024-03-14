@@ -1,14 +1,7 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
-	export let loaded = false;
 	export let title = 'Mitocho';
 	export let description = 'The powerhouse of authentication';
 	export let color = 'normal';
-
-	onMount(async () => {
-		loaded = true;
-	});
 
 	const getBackgroundColor = (): string => {
 		switch (color) {
@@ -18,6 +11,7 @@
 				return 'bg-green-50';
 		}
 	};
+
 </script>
 
 <svelte:head>
@@ -25,8 +19,6 @@
 	<meta name="description" content={description} />
 </svelte:head>
 
-{#if loaded}
-	<div class={getBackgroundColor()}>
-		<slot />
-	</div>
-{/if}
+<div class={getBackgroundColor()}>
+	<slot />
+</div>

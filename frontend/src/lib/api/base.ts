@@ -1,10 +1,13 @@
-const baseAPIURL: string = 'http://localhost:3000/api/v1/';
+import { PUBLIC_MITOCHO_API_URL } from '$env/static/public';
+
+const baseAPIURL: string = PUBLIC_MITOCHO_API_URL;
+
+export type BaseRes = {
+  status: number,
+  request_id: string,
+};
 
 type FetchType = typeof fetch;
-
-interface IServiceResponse<T = any> {
-  [key: string]: T;
-}
 
 export default class BaseService {
   private fetch: FetchType;
@@ -13,7 +16,7 @@ export default class BaseService {
     this.fetch = fetchType;
   }
 
-  async get<T>(endpoint: string, authorization?: string): Promise<IServiceResponse<T>> {
+  async get<O>(endpoint: string, authorization?: string): Promise<O> {
     let response: any;
     if (typeof authorization !== 'undefined') {
       response = await this.fetch(`${baseAPIURL}${endpoint}`, {
@@ -34,7 +37,7 @@ export default class BaseService {
     return response.json();
   }
 
-  async post<T>(endpoint: string, data: T, authorization?: string): Promise<IServiceResponse> {
+  async post<I, O>(endpoint: string, data: I, authorization?: string): Promise<O> {
     let response: any;
     if (typeof authorization !== 'undefined') {
       response = await this.fetch(`${baseAPIURL}${endpoint}`, {
@@ -58,7 +61,7 @@ export default class BaseService {
     return response.json();
   }
 
-  async put<T>(endpoint: string, data: T, authorization?: string): Promise<IServiceResponse> {
+  async put<I, O>(endpoint: string, data: I, authorization?: string): Promise<O> {
     let response: any;
     if (typeof authorization !== 'undefined') {
       response = await this.fetch(`${baseAPIURL}${endpoint}`, {
@@ -82,7 +85,7 @@ export default class BaseService {
     return response.json();
   }
 
-  async delete(endpoint: string, authorization?: string): Promise<IServiceResponse> {
+  async delete<O>(endpoint: string, authorization?: string): Promise<O> {
     let response: any;
     if (typeof authorization !== 'undefined') {
       response = await this.fetch(`${baseAPIURL}${endpoint}`, {

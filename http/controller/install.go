@@ -32,3 +32,9 @@ func (ctrl *Controller) PostAPIInstallFinish(c echo.Context) error {
 
 	return ctrl.Success(c, nil)
 }
+
+func (ctrl *Controller) GetAPIInstallFinish(c echo.Context) error {
+	return ctrl.Success(c, types.JSON{
+		"finished": ctrl.Svc.IsSetupFinished(),
+	})
+}

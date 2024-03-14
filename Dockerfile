@@ -2,6 +2,7 @@
 FROM node:20.11.1-alpine as frontend-builder
 WORKDIR /builder
 COPY /frontend/package.json /frontend/package-lock.json ./
+ENV PUBLIC_MITOCHO_BASE_URL="/api/v1/"
 RUN npm ci
 COPY /frontend .
 RUN npm run build

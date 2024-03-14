@@ -3,6 +3,15 @@
 	// import { getPayload } from '@/paseto';
 	import MitochoPage from '@/components/MitochoPage.svelte';
 	import GetStarted from '@/components/install/GetStarted.svelte';
+	import Loading from '@/loading/Loading.svelte';
+	import { loading } from '@/loading/loading';
+	import { onMount } from 'svelte';
+
+	onMount(async () => {
+		console.log($loading);
+		loading.finish();
+		console.log($loading);
+	});
 
 	// onMount(async () => {
 	// 	const access_token =
@@ -15,5 +24,7 @@
 </script>
 
 <MitochoPage title="Mitocho">
-	<GetStarted />
+	<Loading>
+		<GetStarted />
+	</Loading>
 </MitochoPage>
