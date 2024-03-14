@@ -1,6 +1,18 @@
 import BaseService from './base';
+import BaseRes from './base';
 
-export const postPublicKey = async (fetch: any, data: any) => {
+type postPublicKeyReq = {
+  access_token: string;
+};
+
+type postPublicKeyRes = BaseRes & {
+  response: {
+    public_key?: string;
+    error?: string;
+  }
+};
+
+export const postPublicKey = async (fetch: any, data: postPublicKeyReq) => {
   const base = new BaseService(fetch);
-  return await base.post(`site/public_key`, data);
-}
+  return await base.post<postPublicKeyReq, postPublicKeyRes>(`site/public_key`, data);
+};
