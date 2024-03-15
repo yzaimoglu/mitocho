@@ -7,18 +7,21 @@ import (
 
 type AccessToken string
 type PasetoKeyHex string
+type LogoB64 string
 type Domains json.RawMessage
 type Callbacks json.RawMessage
 
 type Site struct {
 	BaseModel
 	Name          string       `json:"name"`
+	Description   *string      `json:"description,omitempty"`
 	Domains       Domains      `gorm:"type:json" json:"domains"`
 	Callbacks     *Callbacks   `gorm:"type:json" json:"callbacks"`
 	Active        bool         `json:"active"`
 	Mitocho       bool         `json:"mitocho"`
-	PrivacyPolicy string       `json:"privacy_policy"`
-	Imprint       string       `json:"imprint"`
+	PrivacyPolicy *string      `json:"privacy_policy,omitempty"`
+	Imprint       *string      `json:"imprint,omitempty"`
+	Logo          *LogoB64     `json:"logo,omitempty"`
 	AccessToken   AccessToken  `json:"access_token"`
 	PublicKey     PasetoKeyHex `json:"public_key"`
 	PrivateKey    PasetoKeyHex `json:"private_key"`
@@ -53,6 +56,8 @@ func NewMitochoSite(name string, domain string) *Site {
 	}
 
 	pasetoGen := crypto.NewPasetoGen()
+	privacyPolicy := "/privacy"
+	imprint := "/imprint"
 
 	return &Site{
 		Name:          name,
@@ -62,8 +67,8 @@ func NewMitochoSite(name string, domain string) *Site {
 		AccessToken:   AccessToken(accessToken),
 		PublicKey:     PasetoKeyHex(pasetoGen.PublicKeyHex()),
 		PrivateKey:    PasetoKeyHex(pasetoGen.PrivateKeyHex()),
-		PrivacyPolicy: "/privacy",
-		Imprint:       "/imprint",
+		PrivacyPolicy: &privacyPolicy,
+		Imprint:       &imprint,
 	}
 }
 
@@ -82,8 +87,8 @@ func NewSite(name string, privacyPolicy string, imprint string, domain string, c
 		Callbacks:     &callbackObj,
 		Active:        true,
 		Mitocho:       false,
-		PrivacyPolicy: privacyPolicy,
-		Imprint:       imprint,
+		PrivacyPolicy: &privacyPolicy,
+		Imprint:       &imprint,
 		AccessToken:   AccessToken(accessToken),
 		PublicKey:     PasetoKeyHex(pasetoGen.PublicKeyHex()),
 		PrivateKey:    PasetoKeyHex(pasetoGen.PrivateKeyHex()),
@@ -105,8 +110,8 @@ func NewSiteGroup(name string, privacyPolicy string, imprint string, callback st
 		Callbacks:     &callbackObj,
 		Active:        true,
 		Mitocho:       false,
-		PrivacyPolicy: privacyPolicy,
-		Imprint:       imprint,
+		PrivacyPolicy: &privacyPolicy,
+		Imprint:       &imprint,
 		AccessToken:   AccessToken(accessToken),
 		PublicKey:     PasetoKeyHex(pasetoGen.PublicKeyHex()),
 		PrivateKey:    PasetoKeyHex(pasetoGen.PrivateKeyHex()),

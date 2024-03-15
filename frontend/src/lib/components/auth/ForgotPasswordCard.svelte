@@ -5,20 +5,16 @@
 	import Button from '@/components/ui/button/button.svelte';
 	import Label from '@/components/ui/label/label.svelte';
 	import Alert from '../ui/alert/alert.svelte';
-	import { goto } from '$app/navigation';
-	import { loginStore } from '@/stores/loginStore';
 
 	export let sid = "mitocho";
 	export let red = "mitocho";
 
-	type LoginForm = {
+	type ResetPasswordForm = {
 		email: string;
-		password: string;
 	};
 
-	let loginForm: LoginForm = {
+	let resetForm: ResetPasswordForm = {
 		email: '',
-		password: ''
 	};
 
 	let errors: string[] = [];
@@ -26,10 +22,7 @@
 	const formSubmit = async () => {
 		console.log(sid);
 		console.log(red);	
-		console.log(loginForm);
-		// check if credentials are right
-		loginStore.setCredentials(loginForm);
-		goto("/auth/login/2fa");
+		console.log(resetForm);
 	};
 </script>
 
@@ -50,8 +43,8 @@
 			{/if}
 			<div class="flex flex-row justify-between gap-2">
 				<div class="flex flex-col justify-center gap-1.5">
-					<Card.Title>Login</Card.Title>
-					<Card.Description>Please login with your account</Card.Description>
+					<Card.Title>Reset password</Card.Title>
+					<Card.Description>Have you forgotten your password? Reset it by entering your email!</Card.Description>
 				</div>
 				<MitochoLogo width="w-16" />
 			</div>
@@ -62,24 +55,15 @@
 			<div class="flex flex-col gap-1">
 				<Label for="email_input">Email</Label>
 				<Input
-					bind:value={loginForm.email}
+					bind:value={resetForm.email}
 					id="email_input"
 					type="email"
 					placeholder="admin@mitocho.io"
 					class="w-full"
 				/>
+				<a href="/auth/login"><p class="text-xs">Login instead</p></a>
 			</div>
-			<div class="flex flex-col gap-1">
-				<Label for="password_input">Password</Label>
-				<Input
-					bind:value={loginForm.password}
-					id="password_input"
-					type="password"
-					placeholder="************"
-				/>
-				<a href="/auth/forgot-password"><p class="text-xs">Forgot Password?</p></a>
-			</div>
-			<Button type="submit" class="mt-5">Login</Button>
+			<Button type="submit" class="mt-5">Reset password</Button>
 		</form>
 	</Card.Content>
 </Card.Root>

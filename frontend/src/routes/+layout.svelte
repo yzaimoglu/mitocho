@@ -1,5 +1,7 @@
 <script>
 	import '../app.css';
+	import { ModeWatcher } from 'mode-watcher';
+	import { Toaster } from "@/components/ui/sonner";
 </script>
 
 <svelte:head>
@@ -20,5 +22,9 @@
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
 	<meta name="theme-color" content="#ffffff" />
 </svelte:head>
+
+<Toaster />
+
+<ModeWatcher defaultMode={"light"} />
 
 <slot />
