@@ -8,8 +8,8 @@
 	import { goto } from '$app/navigation';
 	import { loginStore } from '@/stores/loginStore';
 
-	export let sid = "mitocho";
-	export let red = "mitocho";
+	export let sid = 'mitocho';
+	export let red = 'mitocho';
 
 	type LoginForm = {
 		email: string;
@@ -25,11 +25,12 @@
 
 	const formSubmit = async () => {
 		console.log(sid);
-		console.log(red);	
+		console.log(red);
 		console.log(loginForm);
 		// check if credentials are right
 		loginStore.setCredentials(loginForm);
-		goto("/auth/login/2fa");
+		let otpUrl = `/auth/login/2fa?sid=${sid}&red=${red}`;
+		goto(otpUrl)
 	};
 </script>
 

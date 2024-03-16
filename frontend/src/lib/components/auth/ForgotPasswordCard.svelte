@@ -46,7 +46,7 @@
 					<Card.Title>Reset password</Card.Title>
 					<Card.Description>Have you forgotten your password? Reset it by entering your email!</Card.Description>
 				</div>
-				<MitochoLogo width="w-16" />
+				<MitochoLogo width="w-20" />
 			</div>
 		</div>
 	</Card.Header>

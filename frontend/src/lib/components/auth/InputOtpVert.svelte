@@ -2,6 +2,7 @@
 	import Input from '@/components/ui/input/input.svelte';
 	import Button from '@/components/ui/button/button.svelte';
 	import { onMount } from 'svelte';
+	import { toast } from 'svelte-sonner';
 
 	export let sid: string;
 	export let red: string;
@@ -23,6 +24,16 @@
 	let otp = Array(6).fill('');
 
 	const updateOtp = (value: any, index: number) => {
+		value = value.replace(/\D/g, '');
+
+		if (value) {
+			otp[index] = value;
+			if (index < otp.length - 1) {
+				document.getElementById(`otp-${index + 1}`).focus();
+			}
+		} else {
+			otp[index] = '';
+		}
 		otp[index] = value;
 		if (value && index < otp.length - 1) {
 			document.getElementById(`otp-${index + 1}`).focus();
@@ -38,6 +49,11 @@
 		}
 	};
 
+	const test = async () => {
+		// Promise.reject("test"); --> if login fails
+		return sid;
+	};
+
 	const handleSubmit = async () => {
 		const otpCode = otp.join('');
 		loginForm = {
@@ -48,6 +64,13 @@
 		console.log(sid);
 		console.log(red);
 		console.log(loginForm);
+		toast.promise(test, {
+			loading: 'Logging in...',
+			success: (data) => {
+				return `Logged in as ${data}`;
+			},
+			error: 'Could not login.'
+		});
 	};
 
 	onMount(() => {
@@ -55,14 +78,15 @@
 	});
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
-	<div class="flex flex-col justify-center gap-4 w-4/5">
+<form class="flex justify-center" on:submit|preventDefault={handleSubmit}>
+	<div class="flex flex-col gap-4 w-full sm:w-3/4 lg:w-3/5 3xl:w-2/5">
 		<div class="flex flex-row gap-2">
 			{#each otp as _, index}
 				<Input
 					class="font-semibold text-center"
 					id={`otp-${index}`}
-					type="text"
+					pattern="[0-9]*"
+					inputmode="numeric"
 					maxlength={1}
 					on:input={(event) => updateOtp(event.target.value, index)}
 					on:keydown={(event) => handleKeyDown(event, index)}

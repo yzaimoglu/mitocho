@@ -3,7 +3,7 @@
 	export let width: string = "w-32";
 </script>
 
-{#if href === undefined}
+{#if href !== undefined}
 <a href={href}>
 	<img class={width} alt="Mitocho Logo" src="/assets/logo.png" />
 </a>

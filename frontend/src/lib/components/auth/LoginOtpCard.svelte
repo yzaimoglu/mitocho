@@ -3,14 +3,11 @@
 	import MitochoLogo from '@/components/MitochoLogo.svelte';
 	import { loginStore } from '@/stores/loginStore';
 	import InputOtpVert from './InputOtpVert.svelte';
-	import InputOtpHorizont from './InputOtpHorizont.svelte';
 
-	export let sid = "mitocho";
-	export let red = "mitocho";
-  export let email = $loginStore.email;
-  export let password = $loginStore.password;
-
-  
+	export let sid = 'mitocho';
+	export let red = 'mitocho';
+	export let email = $loginStore.email;
+	export let password = $loginStore.password;
 </script>
 
 <Card.Root class="w-3/4 md:w-1/2 xl:w-1/3">
@@ -25,11 +22,7 @@
 			</div>
 		</div>
 	</Card.Header>
-	<Card.Content>
-		<div class="flex flex-col gap-4">
-			<div class="flex flex-col gap-1">
-			  <InputOtpHorizont {sid} {red} {email} {password} />
-      </div>
-		</div>
+	<Card.Content class="flex flex-col">
+		<InputOtpVert {sid} {red} {email} {password} />
 	</Card.Content>
 </Card.Root>

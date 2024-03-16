@@ -7,17 +7,19 @@
 	import LoginCard from '@/components/auth/LoginCard.svelte';
 	import CenterPage from '@/components/CenterPage.svelte';
 
-	const sid = $page.url.searchParams.get('sid');
-	const red = $page.url.searchParams.get('red');
+	let sid = $page.url.searchParams.get('sid');
+	let red = $page.url.searchParams.get('red');
 
 	onMount(() => {
 		console.log(`Site ID: ${sid}`);
 		console.log(`Redirect URL: ${red}`);
+		if (sid === null) sid = 'mitocho';
+		if (red === null) red = 'mitocho';
 		loading.finish();
 	});
 </script>
 
-<MitochoPage>
+<MitochoPage title="Login">
 	<Loading>
 		<CenterPage>
 			<LoginCard {sid} {red} />

@@ -28,7 +28,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"bits-ui": "^0.19.6",
+		"bits-ui": "^0.19.7",
 		"clsx": "^2.1.0",
 		"formsnap": "^0.5.1",
 		"mode-watcher": "^0.3.0",
