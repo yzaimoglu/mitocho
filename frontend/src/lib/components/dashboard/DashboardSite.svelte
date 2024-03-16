@@ -26,12 +26,12 @@
 	<Card.Content>
 		<div class="flex flex-col md:flex-row justify-between gap-1">
 			<div class="flex flex-row justify-between gap-1">
-				<Button href={`/dashboard/sites/${sid}`} class="w-1/3 md:w-full" size="sm">Settings</Button>
+				<Button href={`/dashboard/sites/${sid}`} class="md:justify-start w-1/3 md:w-full" size="sm" variant="link">Settings</Button>
 
-				<Button href={`/dashboard/sites/${sid}/users`} class="w-1/3 md:w-full" size="sm"
+				<Button href={`/dashboard/sites/${sid}/users`} class="md:justify-start w-1/3 md:w-full" size="sm" variant="link"
 					>Users</Button
 				>
-				<Button href={`/dashboard/sites/${sid}/roles`} class="w-1/3 md:w-full" size="sm"
+				<Button href={`/dashboard/sites/${sid}/roles`} class="md:justify-start w-1/3 md:w-full" size="sm" variant="link"
 					>Roles</Button
 				>
 			</div>
