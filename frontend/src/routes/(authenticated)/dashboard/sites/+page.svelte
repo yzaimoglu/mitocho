@@ -10,6 +10,16 @@
 	import Input from '@/components/ui/input/input.svelte';
 	import Label from '@/components/ui/label/label.svelte';
 	import Button from '@/components/ui/button/button.svelte';
+	import { page as storePage } from '$app/stores';
+	import MitochoPagination from '@/components/MitochoPagination.svelte';
+
+	let currentPage = $storePage.url.searchParams.get('page');
+	if (currentPage === null) currentPage = '1';
+	let x = 0;
+
+	const changePage = async (page: Number) => {
+		console.log(`Changed to page ${page}`);
+	};
 
 	const sidebarOptions: SidebarOption[] = [
 		{
@@ -25,7 +35,11 @@
 	];
 
 	let dashboardSites = [
-		{ name: 'Object1', domains: ['domain1.com', 'domain2.com'], sid: '12345-fewfefeff-12312341-fefef' },
+		{
+			name: 'Object1',
+			domains: ['domain1.com', 'domain2.com'],
+			sid: '12345-fewfefeff-12312341-fefef'
+		},
 		{ name: 'Object2', domains: ['domain3.com', 'domain4.com'], sid: 'SID2' },
 		{ name: 'Object3', domains: ['domain5.com', 'domain6.com'], sid: 'SID3' },
 		{ name: 'Object4', domains: ['domain7.com', 'domain8.com'], sid: 'SID4' },
@@ -59,11 +73,12 @@
 					<Button>Search</Button>
 				</form>
 
-				<div class="flex flex-col gap-2">
+				<div class="flex flex-col gap-2 mb-4">
 					{#each dashboardSites as site}
 						<DashboardSite name={site.name} sid={site.sid} />
 					{/each}
 				</div>
+				<MitochoPagination bind:currentPage changePageFunction={changePage} count={200} siblingCount={1} perPage={10} />
 			</SidebarLayoutPage>
 		</FullPage>
 	</Loading>
