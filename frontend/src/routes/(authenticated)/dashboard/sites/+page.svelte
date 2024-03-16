@@ -6,6 +6,10 @@
 	import { onMount } from 'svelte';
 	import type { SidebarOption } from '@/components/dashboard/Sidebar.svelte';
 	import SidebarLayoutPage from '@/components/SidebarLayoutPage.svelte';
+	import DashboardSite from '@/components/dashboard/DashboardSite.svelte';
+	import Input from '@/components/ui/input/input.svelte';
+	import Label from '@/components/ui/label/label.svelte';
+	import Button from '@/components/ui/button/button.svelte';
 
 	const sidebarOptions: SidebarOption[] = [
 		{
@@ -18,6 +22,14 @@
 			active: true,
 			href: '/dashboard/sites'
 		}
+	];
+
+	let dashboardSites = [
+		{ name: 'Object1', domains: ['domain1.com', 'domain2.com'], sid: 'SID1' },
+		{ name: 'Object2', domains: ['domain3.com', 'domain4.com'], sid: 'SID2' },
+		{ name: 'Object3', domains: ['domain5.com', 'domain6.com'], sid: 'SID3' },
+		{ name: 'Object4', domains: ['domain7.com', 'domain8.com'], sid: 'SID4' },
+		{ name: 'Object5', domains: ['domain9.com', 'domain10.com'], sid: 'SID5' }
 	];
 
 	onMount(() => {
@@ -39,7 +51,19 @@
 				innerDescription="Manage your sites from here"
 				{sidebarOptions}
 			>
-				<div>Dashboard</div>
+				<form class="flex flex-row gap-2 items-end mb-4">
+					<div class="flex flex-col w-full gap-2">
+						<Label for="site_search_input">Search for a specific site</Label>
+						<Input id="site_search_input" class="w-full" type="text" placeholder="mitocho" />
+					</div>
+					<Button>Search</Button>
+				</form>
+
+				<div class="flex flex-col gap-2">
+					{#each dashboardSites as site}
+						<DashboardSite name={site.name} domains={site.domains} sid={site.sid} />
+					{/each}
+				</div>
 			</SidebarLayoutPage>
 		</FullPage>
 	</Loading>

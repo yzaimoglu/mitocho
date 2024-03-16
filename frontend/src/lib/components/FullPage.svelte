@@ -1,6 +1,6 @@
 <script lang="ts">
 </script>
 
-<div class={`h-screen`}>
+<div class={`min-h-screen`}>
   <slot />
 </div>

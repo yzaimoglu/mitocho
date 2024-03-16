@@ -14,7 +14,7 @@
 </script>
 
 <div class="flex flex-col items-center">
-	<div class="flex flex-col gap-2 mt-2 w-4/5 2xl:w-3/5">
+	<div class="flex flex-col gap-2 my-3 w-5/6 2xl:w-3/5">
 		<MainNavbar {current} {red} />
 		<SidebarLayout
 			{title}

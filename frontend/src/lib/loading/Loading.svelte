@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CenterPage from '@/components/CenterPage.svelte';
 	import LoadingSpinner from '@/components/LoadingSpinner.svelte';
 	import { loading } from '@/loading/loading';
 
@@ -6,7 +7,9 @@
 </script>
 
 {#if $loading}
-	<LoadingSpinner />
+	<CenterPage>
+		<LoadingSpinner />
+	</CenterPage>
 {:else}
 	<slot />
 {/if}

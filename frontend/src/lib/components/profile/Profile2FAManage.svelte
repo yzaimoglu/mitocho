@@ -14,7 +14,7 @@
 <form on:submit|preventDefault={formSubmit} class="flex flex-col gap-8 w-full xl:w-3/4 2xl:w-3/5">
 	<p class="text-md text-muted-foreground text-justify">
 		You have already activated two factor authentication. We highly recommend using two factor
-		authentication and strongly advise against removing it. If you still have the need to do so you
+		authentication and strongly advise against removing it. If you still have the need to do so, you
 		can do it here.
 	</p>
 
@@ -26,7 +26,8 @@
 			<AlertDialog.Header>
 				<AlertDialog.Title>Are you absolutely sure?</AlertDialog.Title>
 				<AlertDialog.Description>
-					This will remove your current two factor authentication and thus your secondary account protection.
+					This will remove your current two factor authentication and thus your secondary account
+					protection.
 				</AlertDialog.Description>
 			</AlertDialog.Header>
 			<AlertDialog.Footer>

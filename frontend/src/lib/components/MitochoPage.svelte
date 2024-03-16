@@ -11,7 +11,6 @@
 				return 'bg-green-50';
 		}
 	};
-
 </script>
 
 <svelte:head>

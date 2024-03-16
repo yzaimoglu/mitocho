@@ -47,8 +47,8 @@
 
 <Card.Root class="p-3">
 	<Card.Content class="p-0">
-		<nav class="flex flex-row justify-between">
-			<div class="flex flex-row gap-2">
+		<nav class="flex flex-col items-center gap-3 md:gap-0 md:flex-row md:justify-between">
+			<div class="flex flex-col items-center md:flex-row gap-2">
 				{#if red !== 'mitocho'}
 					<MitochoLogo href={red} width="w-8" />
 					<Button href={red} variant="link">Back to App</Button>
