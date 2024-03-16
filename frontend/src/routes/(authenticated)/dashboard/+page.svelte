@@ -4,9 +4,8 @@
 	import Loading from '@/loading/Loading.svelte';
 	import { loading } from '@/loading/loading';
 	import { onMount } from 'svelte';
-	import MainNavbar from '@/components/MainNavbar.svelte';
-	import SidebarLayout from '@/components/SidebarLayout.svelte';
 	import type { SidebarOption } from '@/components/dashboard/Sidebar.svelte';
+	import SidebarLayoutPage from '@/components/SidebarLayoutPage.svelte';
 
 	const sidebarOptions: SidebarOption[] = [
 		{
@@ -32,20 +31,16 @@
 >
 	<Loading>
 		<FullPage>
-			<div class="flex flex-col items-center">
-				<div class="flex flex-col gap-2 mt-2 w-4/5">
-					<MainNavbar current="/dashboard" />
-					<SidebarLayout
-						title="Dashboard"
-						description="Monitor registered users and manage your sites"
-						innerTitle="General"
-						innerDescription="Usage information regarding your Mitocho instance"
-						{sidebarOptions}
-					>
-						<div>Test</div>
-					</SidebarLayout>
-				</div>
-			</div>
+			<SidebarLayoutPage
+				current="/dashboard"
+				title="Dashboard"
+				description="Monitor registered users and manage your sites"
+				innerTitle="General"
+				innerDescription="Usage information regarding your Mitocho instance"
+				{sidebarOptions}
+			>
+				<div>Dashboard</div>
+			</SidebarLayoutPage>
 		</FullPage>
 	</Loading>
 </MitochoPage>

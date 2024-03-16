@@ -9,6 +9,7 @@
 	import type { SidebarOption } from '@/components/dashboard/Sidebar.svelte';
 
 	import { page } from '$app/stores';
+	import SidebarLayoutPage from '@/components/SidebarLayoutPage.svelte';
 
 	const sid = $page.url.searchParams.get('sid');
 	const red = $page.url.searchParams.get('red');
@@ -41,20 +42,16 @@
 <MitochoPage title="Profile" description="Manage your profile from here">
 	<Loading>
 		<FullPage>
-			<div class="flex flex-col items-center">
-				<div class="flex flex-col gap-2 mt-2 w-4/5">
-					<MainNavbar current="/auth/profile" />
-					<SidebarLayout
-						title="Profile"
-						description="Change your email, username, password or enable two factor authentication"
-						innerTitle="General"
-						innerDescription="Change your email or username"
-						{sidebarOptions}
-					>
-						<div>Form</div>
-					</SidebarLayout>
-				</div>
-			</div>
+			<SidebarLayoutPage
+				current="/auth/profile"
+				title="Profile"
+				description="Change your username, email, password or enable two factor authentication"
+				innerTitle="General"
+				innerDescription="Manage your general user settings"
+				{sidebarOptions}
+			>
+			<div>Test</div>
+			</SidebarLayoutPage>
 		</FullPage>
 	</Loading>
 </MitochoPage>
