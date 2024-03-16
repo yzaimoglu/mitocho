@@ -11,12 +11,12 @@
 		{
 			name: 'General',
 			active: true,
-			href: '/auth/profile/general'
+			href: '/dashboard'
 		},
 		{
 			name: 'Sites',
 			active: false,
-			href: '/auth/profile/password'
+			href: '/dashboard/sites'
 		}
 	];
 

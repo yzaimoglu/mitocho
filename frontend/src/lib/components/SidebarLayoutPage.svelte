@@ -5,6 +5,7 @@
 	import type { SidebarOption } from '@/components/dashboard/Sidebar.svelte';
 
 	export let current: string;
+	export let red: string = "mitocho";
 	export let title: string;
 	export let description: string;
 	export let sidebarOptions: SidebarOption[];
@@ -13,8 +14,8 @@
 </script>
 
 <div class="flex flex-col items-center">
-	<div class="flex flex-col gap-2 mt-2 w-4/5">
-		<MainNavbar {current} />
+	<div class="flex flex-col gap-2 mt-2 w-4/5 2xl:w-3/5">
+		<MainNavbar {current} {red} />
 		<SidebarLayout
 			{title}
 			{description}

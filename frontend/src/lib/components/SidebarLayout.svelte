@@ -25,7 +25,7 @@
 			<div class="md:w-3/4">
 				<h1 class="mt-4 md:mt-0 text-lg font-bold">{innerTitle}</h1>
 				<h2 class="text-md">{innerDescription}</h2>
-				<Separator class="my-2" />
+				<Separator class="mt-2 mb-8" />
 				<slot />
 			</div>
 		</div>

@@ -8,7 +8,7 @@
 
 	import { page } from '$app/stores';
 	import SidebarLayoutPage from '@/components/SidebarLayoutPage.svelte';
-	import ProfileGeneralForm from '@/components/profile/ProfileGeneralForm.svelte';
+	import ProfilePasswordForm from '@/components/profile/ProfilePasswordForm.svelte';
 
 	let sid = $page.url.searchParams.get('sid');
 	let red = $page.url.searchParams.get('red');
@@ -19,12 +19,12 @@
 	const sidebarOptions: SidebarOption[] = [
 		{
 			name: 'General',
-			active: true,
+			active: false,
 			href: `/auth/profile?sid=${sid}&red=${red}`
 		},
 		{
 			name: 'Password',
-			active: false,
+			active: true,
 			href: `/auth/profile/password?sid=${sid}&red=${red}`
 		},
 		{
@@ -48,12 +48,12 @@
 				current="/auth/profile"
 				title="Profile"
 				description="Change your username, email, password or enable two factor authentication"
-				innerTitle="General"
-				innerDescription="Manage your general user settings"
+				innerTitle="Password"
+				innerDescription="Change your password"
 				{sidebarOptions}
 				{red}
 			>
-				<ProfileGeneralForm {sid} {red} />
+				<ProfilePasswordForm {sid} {red} />
 			</SidebarLayoutPage>
 		</FullPage>
 	</Loading>

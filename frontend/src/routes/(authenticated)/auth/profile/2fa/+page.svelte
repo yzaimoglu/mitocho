@@ -8,7 +8,9 @@
 
 	import { page } from '$app/stores';
 	import SidebarLayoutPage from '@/components/SidebarLayoutPage.svelte';
-	import ProfileGeneralForm from '@/components/profile/ProfileGeneralForm.svelte';
+	import Profile2FaCreate from '@/components/profile/Profile2FACreate.svelte';
+	import Profile2FaManage from '@/components/profile/Profile2FAManage.svelte';
+	import Button from '@/components/ui/button/button.svelte';
 
 	let sid = $page.url.searchParams.get('sid');
 	let red = $page.url.searchParams.get('red');
@@ -19,7 +21,7 @@
 	const sidebarOptions: SidebarOption[] = [
 		{
 			name: 'General',
-			active: true,
+			active: false,
 			href: `/auth/profile?sid=${sid}&red=${red}`
 		},
 		{
@@ -29,7 +31,7 @@
 		},
 		{
 			name: '2FA',
-			active: false,
+			active: true,
 			href: `/auth/profile/2fa?sid=${sid}&red=${red}`
 		}
 	];
@@ -39,6 +41,7 @@
 		console.log(`Redirect URL: ${red}`);
 		loading.finish();
 	});
+	let current = true;
 </script>
 
 <MitochoPage title="Profile" description="Manage your profile from here">
@@ -48,12 +51,17 @@
 				current="/auth/profile"
 				title="Profile"
 				description="Change your username, email, password or enable two factor authentication"
-				innerTitle="General"
-				innerDescription="Manage your general user settings"
+				innerTitle="Two Factor Authentication"
+				innerDescription="Manage your two factor authentication"
 				{sidebarOptions}
 				{red}
 			>
-				<ProfileGeneralForm {sid} {red} />
+				<Button class="mb-4" on:click={() => current = !current}>Change state</Button>
+				{#if current}
+					<Profile2FaCreate {sid} {red} />
+				{:else}
+					<Profile2FaManage {sid} {red} />
+				{/if}
 			</SidebarLayoutPage>
 		</FullPage>
 	</Loading>
