@@ -25,7 +25,7 @@
 	];
 
 	let dashboardSites = [
-		{ name: 'Object1', domains: ['domain1.com', 'domain2.com'], sid: 'SID1' },
+		{ name: 'Object1', domains: ['domain1.com', 'domain2.com'], sid: '12345-fewfefeff-12312341-fefef' },
 		{ name: 'Object2', domains: ['domain3.com', 'domain4.com'], sid: 'SID2' },
 		{ name: 'Object3', domains: ['domain5.com', 'domain6.com'], sid: 'SID3' },
 		{ name: 'Object4', domains: ['domain7.com', 'domain8.com'], sid: 'SID4' },
@@ -61,7 +61,7 @@
 
 				<div class="flex flex-col gap-2">
 					{#each dashboardSites as site}
-						<DashboardSite name={site.name} domains={site.domains} sid={site.sid} />
+						<DashboardSite name={site.name} sid={site.sid} />
 					{/each}
 				</div>
 			</SidebarLayoutPage>
