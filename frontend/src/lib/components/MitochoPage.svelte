@@ -18,6 +18,6 @@
 	<meta name="description" content={description} />
 </svelte:head>
 
-<div class={getBackgroundColor()}>
+<div class={`${getBackgroundColor()}`}>
 	<slot />
 </div>

@@ -4,16 +4,26 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 const config = {
 	darkMode: ["class"],
 	content: ["./src/**/*.{html,js,svelte,ts}"],
-  safelist: ["dark"],
+	safelist: ["dark"],
 	theme: {
 		container: {
 			center: true,
 			padding: "2rem",
 			screens: {
-				"2xl": "1400px"
-			}
+				"2xl": "1400px",
+				"3xl": "1900px"
+			},
 		},
 		extend: {
+			fontSize: {
+				sm: '1rem',
+				base: '1rem',
+				xl: '1.25rem',
+				'2xl': '1.563rem',
+				'3xl': '1.953rem',
+				'4xl': '2.441rem',
+				'5xl': '3.052rem',
+			},
 			colors: {
 				border: "hsl(var(--border) / <alpha-value>)",
 				input: "hsl(var(--input) / <alpha-value>)",
