@@ -7,6 +7,12 @@
 		switch (color) {
 			case 'error':
 				return 'bg-red-50';
+			case 'red':
+				return 'bg-red-50';
+			case 'blue':
+				return 'bg-blue-50';
+			case 'purple':
+				return 'bg-purple-50';
 			default:
 				return 'bg-green-50';
 		}
