@@ -7,20 +7,21 @@
 	import type { SidebarOption } from '@/components/dashboard/Sidebar.svelte';
 	import SidebarLayoutPage from '@/components/SidebarLayoutPage.svelte';
 	import DashboardSite from '@/components/dashboard/DashboardSite.svelte';
-	import Input from '@/components/ui/input/input.svelte';
-	import Label from '@/components/ui/label/label.svelte';
-	import Button from '@/components/ui/button/button.svelte';
 	import { page as storePage } from '$app/stores';
 	import MitochoPagination from '@/components/MitochoPagination.svelte';
+	import DashboardSiteSearch from '@/components/dashboard/DashboardSiteSearch.svelte';
 
+	// Pagination
 	let currentPage = $storePage.url.searchParams.get('page');
 	if (currentPage === null) currentPage = '1';
-	let x = 0;
-
 	const changePage = async (page: Number) => {
 		console.log(`Changed to page ${page}`);
 	};
 
+	// Search
+	let search = '';
+
+	// Sidebar settings
 	const sidebarOptions: SidebarOption[] = [
 		{
 			name: 'General',
@@ -34,6 +35,7 @@
 		}
 	];
 
+	// Sites
 	let dashboardSites = [
 		{
 			name: 'Object1',
@@ -65,20 +67,19 @@
 				innerDescription="Manage your sites from here"
 				{sidebarOptions}
 			>
-				<form class="flex flex-row gap-2 items-end mb-4">
-					<div class="flex flex-col w-full gap-2">
-						<Label for="site_search_input">Search for a specific site</Label>
-						<Input id="site_search_input" class="w-full" type="text" placeholder="mitocho" />
-					</div>
-					<Button>Search</Button>
-				</form>
-
-				<div class="flex flex-col gap-2 mb-4">
+				<DashboardSiteSearch bind:search />
+				<div class="grid grid-cols-1 xl:grid-cols-2 gap-2 mb-4">
 					{#each dashboardSites as site}
 						<DashboardSite name={site.name} sid={site.sid} />
 					{/each}
 				</div>
-				<MitochoPagination bind:currentPage changePageFunction={changePage} count={200} siblingCount={1} perPage={10} />
+				<MitochoPagination
+					bind:currentPage
+					changePageFunction={changePage}
+					count={100}
+					siblingCount={1}
+					perPage={dashboardSites.length}
+				/>
 			</SidebarLayoutPage>
 		</FullPage>
 	</Loading>
