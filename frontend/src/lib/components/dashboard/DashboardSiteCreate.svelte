@@ -34,7 +34,7 @@
 
 	const addNewDomain = () => {
 		if (siteCreateForm.domains.length > 2) {
-			toast.error('Please do not add more than 2 extra domains.');
+			toast.error('Please do not add more than 3 domains.');
 		} else {
 			siteCreateForm.domains[siteCreateForm.domains.length] = '';
 		}
