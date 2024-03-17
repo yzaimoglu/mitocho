@@ -1,7 +1,13 @@
 <script lang="ts">
-  export let gap = 4;
+	import MitochoFooter from './MitochoFooter.svelte';
+
+	export let footer = true;
+	export let gap = 4;
 </script>
 
 <div class={`flex flex-col justify-center items-center min-h-screen gap-${gap}`}>
-  <slot />
+	<slot />
+	{#if footer}
+		<MitochoFooter />
+	{/if}
 </div>

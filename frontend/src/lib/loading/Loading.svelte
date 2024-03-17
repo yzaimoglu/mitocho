@@ -7,7 +7,7 @@
 </script>
 
 {#if $loading}
-	<CenterPage>
+	<CenterPage footer={false}>
 		<LoadingSpinner />
 	</CenterPage>
 {:else}

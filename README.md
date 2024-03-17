@@ -86,7 +86,7 @@ We appreciate everyone who wants to contribute. In order to do so take a look at
 
 ## License
 
-Distributed under the BSD-3 License. See [LICENSE](https://github.com/yzaimoglu/mitocho/blob/master/LICENSE) for more information.
+Distributed under the BSD 3-Clause License. See [LICENSE](https://github.com/yzaimoglu/mitocho/blob/master/LICENSE) for more information.
 
 ## Acknowledgements
 
