@@ -1,5 +1,5 @@
 {
-	"name": "frontend",
+	"name": "mitocho-frontend",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -32,6 +32,7 @@
 		"clsx": "^2.1.0",
 		"formsnap": "^0.5.1",
 		"lucide-svelte": "^0.358.0",
+		"mitocho": "^0.0.1",
 		"mode-watcher": "^0.3.0",
 		"paseto-ts": "^1.5.7",
 		"svelte-legos": "^0.2.2",

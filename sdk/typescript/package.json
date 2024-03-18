@@ -1,15 +1,22 @@
 {
-  "name": "mitocho-ts",
+  "name": "mitocho",
   "version": "0.0.1",
-  "description": "Typescript SDK for Mitocho",
-  "main": "index.ts",
+  "description": "The Typescript SDK for Mitocho",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsup"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yzaimoglu/mitocho.git"
   },
+  "keywords": [
+    "mitocho",
+    "authentication",
+    "paseto"
+  ],
   "author": "Yagizalp Zaimoglu",
   "license": "BSD-3-Clause",
   "bugs": {
@@ -17,7 +24,10 @@
   },
   "homepage": "https://github.com/yzaimoglu/mitocho#readme",
   "devDependencies": {
-    "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
     "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "paseto-ts": "^1.5.7"
   }
 }
