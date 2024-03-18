@@ -14,6 +14,11 @@
 			href: '/dashboard'
 		},
 		{
+			name: 'Settings',
+			active: false,
+			href: '/dashboard/settings'
+		},
+		{
 			name: 'Sites',
 			active: false,
 			href: '/dashboard/sites'

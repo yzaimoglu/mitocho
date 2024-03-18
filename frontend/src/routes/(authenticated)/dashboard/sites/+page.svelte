@@ -4,7 +4,7 @@
 	import Loading from '@/loading/Loading.svelte';
 	import { loading } from '@/loading/loading';
 	import { onMount } from 'svelte';
-	import type { SidebarOption } from '@/components/dashboard/Sidebar.svelte';
+	import { levelSecondary, type SidebarOption } from '@/components/dashboard/Sidebar.svelte';
 	import SidebarLayoutPage from '@/components/SidebarLayoutPage.svelte';
 	import DashboardSite from '@/components/dashboard/DashboardSite.svelte';
 	import { page as storePage } from '$app/stores';
@@ -27,6 +27,11 @@
 			name: 'General',
 			active: false,
 			href: '/dashboard'
+		},
+		{
+			name: 'Settings',
+			active: false,
+			href: '/dashboard/settings'
 		},
 		{
 			name: 'Sites',
@@ -73,13 +78,15 @@
 						<DashboardSite name={site.name} sid={site.sid} />
 					{/each}
 				</div>
-				<MitochoPagination
-					bind:currentPage
-					changePageFunction={changePage}
-					count={100}
-					siblingCount={1}
-					perPage={dashboardSites.length}
-				/>
+				{#if dashboardSites.length > 0}
+					<MitochoPagination
+						bind:currentPage
+						changePageFunction={changePage}
+						count={100}
+						siblingCount={1}
+						perPage={dashboardSites.length}
+					/>
+				{/if}
 			</SidebarLayoutPage>
 		</FullPage>
 	</Loading>

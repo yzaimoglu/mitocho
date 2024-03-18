@@ -8,7 +8,9 @@
 	import { BookmarkPlus, BookmarkX } from 'lucide-svelte';
 	import { toast } from 'svelte-sonner';
 
-	type SiteCreateForm = {
+	export let sid: any;
+
+	type SiteManageForm = {
 		name: string;
 		description?: string;
 		domains: string[];
@@ -20,7 +22,7 @@
 		terms_of_service: string;
 	};
 
-	let siteCreateForm: SiteCreateForm = {
+	let siteManageForm: SiteManageForm = {
 		name: '',
 		description: '',
 		domains: [''],
@@ -33,31 +35,31 @@
 	};
 
 	const addNewDomain = () => {
-		if (siteCreateForm.domains.length > 2) {
+		if (siteManageForm.domains.length > 2) {
 			toast.error('Please do not add more than 3 domains.');
 		} else {
-			siteCreateForm.domains[siteCreateForm.domains.length] = '';
+			siteManageForm.domains[siteManageForm.domains.length] = '';
 		}
 	};
 
 	const addNewCallback = () => {
-		if (siteCreateForm.callbacks.length > 2) {
+		if (siteManageForm.callbacks.length > 2) {
 			toast.error('Please do not add more than 3 callbacks.');
 		} else {
-			siteCreateForm.callbacks[siteCreateForm.callbacks.length] = '';
+			siteManageForm.callbacks[siteManageForm.callbacks.length] = '';
 		}
 	};
 
 	const removeDomain = (index: number) => {
-		let tmp = siteCreateForm.domains;
+		let tmp = siteManageForm.domains;
 		tmp.splice(index, 1);
-		siteCreateForm.domains = tmp;
+		siteManageForm.domains = tmp;
 	};
 
 	const removeCallback = (index: number) => {
-		let tmp = siteCreateForm.callbacks;
+		let tmp = siteManageForm.callbacks;
 		tmp.splice(index, 1);
-		siteCreateForm.callbacks = tmp;
+		siteManageForm.callbacks = tmp;
 	};
 
 	const filterDuplicates = (array: any): any => {
@@ -89,7 +91,7 @@
 			// Read bytes
 			reader.onload = (e: ProgressEvent<FileReader>) => {
 				const dataUrl = e.target.result as string;
-				siteCreateForm.logo = dataUrl;
+				siteManageForm.logo = dataUrl;
 			};
 
 			// Read error
@@ -106,17 +108,24 @@
 	};
 
 	const formSubmit = async () => {
-		siteCreateForm.callbacks = filterDuplicates(siteCreateForm.callbacks);
-		siteCreateForm.domains = filterDuplicates(siteCreateForm.domains);
-		console.log(siteCreateForm);
+		siteManageForm.callbacks = filterDuplicates(siteManageForm.callbacks);
+		siteManageForm.domains = filterDuplicates(siteManageForm.domains);
+		console.log(siteManageForm);
 	};
 </script>
 
 <form on:submit|preventDefault={formSubmit} class="flex flex-col gap-8 w-full xl:w-3/4 2xl:w-3/5">
+	<div class="flex flex-col gap-1">
+		<Label>Manage users or roles</Label>
+		<div class="flex flex-row gap-2">
+			<Button type="button" class="w-1/2" href={`/dashboard/sites/${sid}/users`}>Users</Button>
+			<Button type="button" class="w-1/2" href={`/dashboard/sites/${sid}/roles`}>Roles</Button>
+		</div>
+	</div>
 	<!-- Name -->
 	<div class="flex flex-col gap-1">
 		<Label for="name_input">Site Name</Label>
-		<Input bind:value={siteCreateForm.name} id="name_input" type="text" placeholder="mitocho" />
+		<Input bind:value={siteManageForm.name} id="name_input" type="text" placeholder="mitocho" />
 		<p class="text-sm text-muted-foreground">
 			This is the name of this site. You will see this on the dashboard.
 		</p>
@@ -126,7 +135,7 @@
 	<div class="flex flex-col gap-1">
 		<Label for="description_input">Site Description</Label>
 		<Input
-			bind:value={siteCreateForm.description}
+			bind:value={siteManageForm.description}
 			id="description_input"
 			type="text"
 			placeholder="Mitocho instance"
@@ -140,7 +149,7 @@
 	<div class="flex flex-col gap-1">
 		<Label for="imprint_input">Imprint</Label>
 		<Input
-			bind:value={siteCreateForm.imprint}
+			bind:value={siteManageForm.imprint}
 			id="imprint_input"
 			type="text"
 			placeholder="https://example.com/imprint"
@@ -156,7 +165,7 @@
 		<div class="flex flex-col gap-1 md:w-1/2">
 			<Label for="privacy_input">Privacy Policy</Label>
 			<Input
-				bind:value={siteCreateForm.privacy_policy}
+				bind:value={siteManageForm.privacy_policy}
 				id="privacy_input"
 				type="text"
 				placeholder="https://example.com/privacy"
@@ -169,7 +178,7 @@
 		<div class="flex flex-col gap-1 md:w-1/2">
 			<Label for="tos_input">Terms of Service</Label>
 			<Input
-				bind:value={siteCreateForm.terms_of_service}
+				bind:value={siteManageForm.terms_of_service}
 				id="tos_input"
 				type="text"
 				placeholder="https://example.com/tos"
@@ -187,7 +196,7 @@
 			<Label for="color_input">Color</Label>
 			<MitochoSelect
 				className="w-full"
-				bind:selected={siteCreateForm.color}
+				bind:selected={siteManageForm.color}
 				label="Color"
 				placeholder="Color"
 				items={Colors}
@@ -218,10 +227,10 @@
 					</button>
 				</MitochoTooltip>
 			</Label>
-			{#each siteCreateForm.domains as _, domainIndex}
+			{#each siteManageForm.domains as _, domainIndex}
 				<div class="flex flex-row gap-1">
 					<Input
-						bind:value={siteCreateForm.domains[domainIndex]}
+						bind:value={siteManageForm.domains[domainIndex]}
 						id={`domains_${domainIndex}_input`}
 						type="text"
 						placeholder="example.com"
@@ -250,10 +259,10 @@
 					</button>
 				</MitochoTooltip>
 			</Label>
-			{#each siteCreateForm.callbacks as _, callbackIndex}
+			{#each siteManageForm.callbacks as _, callbackIndex}
 				<div class="flex flex-row gap-1">
 					<Input
-						bind:value={siteCreateForm.callbacks[callbackIndex]}
+						bind:value={siteManageForm.callbacks[callbackIndex]}
 						id={`callbacks_${callbackIndex}_input`}
 						type="text"
 						placeholder="https://example.com/callback"
@@ -273,7 +282,7 @@
 		</div>
 	</div>
 
-	<MitochoTooltip tooltip="Create the site with these parameters">
-		<Button class="w-full" type="submit">Create Site</Button>
+	<MitochoTooltip tooltip="Change page settings">
+		<Button class="w-full" type="submit">Change Settings</Button>
 	</MitochoTooltip>
 </form>

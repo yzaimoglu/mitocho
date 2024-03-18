@@ -5,6 +5,7 @@
 	import Input from '../ui/input/input.svelte';
 	import Label from '../ui/label/label.svelte';
 
+	export let sid;
 	export let search = '';
 
 	const handleSearch = async () => {
@@ -13,7 +14,7 @@
 </script>
 
 <form on:submit|preventDefault={handleSearch} class="flex flex-col gap-2">
-	<Label for="site_search_input">Search for a specific site or create one</Label>
+	<Label for="site_search_input">Search for a specific user or create one</Label>
 	<div class="flex flex-row items-end mb-4 gap-2">
 		<div class="flex flex-col w-full gap-2">
 			<Input
@@ -21,14 +22,14 @@
 				class="w-full"
 				bind:value={search}
 				type="text"
-				placeholder="mitocho"
+				placeholder="admin"
 			/>
 		</div>
-		<MitochoTooltip tooltip="Search for an existing site">
+		<MitochoTooltip tooltip="Search for an existing user">
 			<Button type="submit">Search</Button>
 		</MitochoTooltip>
-		<MitochoTooltip tooltip="Create a new site">
-			<Button href="/dashboard/sites/create">
+		<MitochoTooltip tooltip="Create a new user">
+			<Button href={`/dashboard/sites/${sid}/users/create`}>
 				<ShieldPlus />
 			</Button>
 		</MitochoTooltip>

@@ -4,7 +4,7 @@
 	import Loading from '@/loading/Loading.svelte';
 	import { loading } from '@/loading/loading';
 	import { onMount } from 'svelte';
-	import type { SidebarOption } from '@/components/dashboard/Sidebar.svelte';
+	import { levelSecondary, type SidebarOption } from '@/components/dashboard/Sidebar.svelte';
 	import SidebarLayoutPage from '@/components/SidebarLayoutPage.svelte';
 	import DashboardSiteCreate from '@/components/dashboard/DashboardSiteCreate.svelte';
 
@@ -14,6 +14,11 @@
 			name: 'General',
 			active: false,
 			href: '/dashboard'
+		},
+		{
+			name: 'Settings',
+			active: false,
+			href: '/dashboard/settings'
 		},
 		{
 			name: 'Sites',
@@ -27,10 +32,7 @@
 	});
 </script>
 
-<MitochoPage
-	title="Create a new Site"
-	description="Create a new site from here"
->
+<MitochoPage title="Create a new Site" description="Create a new site from here">
 	<Loading>
 		<FullPage>
 			<SidebarLayoutPage

@@ -1,20 +1,53 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import MitochoPage from '@/components/MitochoPage.svelte';
+	import FullPage from '@/components/FullPage.svelte';
 	import Loading from '@/loading/Loading.svelte';
 	import { loading } from '@/loading/loading';
 	import { onMount } from 'svelte';
-  
-  const sid = $page.params.sid;
-	
+	import { levelSecondary, type SidebarOption } from '@/components/dashboard/Sidebar.svelte';
+	import SidebarLayoutPage from '@/components/SidebarLayoutPage.svelte';
+	import DashboardSiteSettings from '@/components/dashboard/DashboardSiteSettings.svelte';
+	import { page } from '$app/stores';
+
+	const sid = $page.params.sid;
+
+	// Sidebar settings
+	const sidebarOptions: SidebarOption[] = [
+		{
+			name: 'General',
+			active: false,
+			href: '/dashboard'
+		},
+		{
+			name: 'Settings',
+			active: false,
+			href: '/dashboard/settings'
+		},
+		{
+			name: 'Sites',
+			active: true,
+			href: '/dashboard/sites'
+		}
+	];
+
 	onMount(() => {
-		console.log(`Site ID: ${sid}`)
 		loading.finish();
 	});
 </script>
 
-<MitochoPage>
+<MitochoPage title="Site Settings" description="Manage your site settings">
 	<Loading>
-		<div>Dashboard Sites</div>
+		<FullPage>
+			<SidebarLayoutPage
+				current="/dashboard"
+				title="Dashboard"
+				description="Monitor registered users and manage your sites"
+				innerTitle="Site Settings"
+				innerDescription="Manage your site settings"
+				{sidebarOptions}
+			>
+				<DashboardSiteSettings {sid} />
+			</SidebarLayoutPage>
+		</FullPage>
 	</Loading>
 </MitochoPage>
