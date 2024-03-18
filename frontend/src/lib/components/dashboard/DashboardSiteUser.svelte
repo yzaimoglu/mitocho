@@ -17,6 +17,7 @@
 	import MitochoTooltip from '../MitochoTooltip.svelte';
 	import MitochoDialog from '@/components/MitochoDialog.svelte';
 	import DashboardSiteUserPermissions from './DashboardSiteUserPermissions.svelte';
+	import DashboardSiteUserRoles from './DashboardSiteUserRoles.svelte';
 
 	export let user;
 	export let sid;
@@ -62,7 +63,7 @@
 						>
 					</div>
 					<div slot="content">
-						<!-- UserRolesCmp -->
+						<DashboardSiteUserRoles {user} />
 					</div>
 				</MitochoDialog>
 			</div>

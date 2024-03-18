@@ -43,7 +43,7 @@
 				title="Dashboard"
 				description="Monitor registered users and manage your sites"
 				innerTitle="Site Settings"
-				innerDescription="Manage your site settings"
+				innerDescription={sid}
 				{sidebarOptions}
 			>
 				<DashboardSiteSettings {sid} />

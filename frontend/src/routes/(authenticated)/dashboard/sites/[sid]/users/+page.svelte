@@ -71,8 +71,8 @@
 				current="/dashboard"
 				title="Dashboard"
 				description="Monitor registered users and manage your sites"
-				innerTitle="Sites"
-				innerDescription="Manage your sites from here"
+				innerTitle="Site Users"
+				innerDescription={sid}
 				{sidebarOptions}
 			>
 				<DashboardSiteUserSearch {sid} bind:search />
