@@ -5,7 +5,7 @@
 </script>
 
 <Dialog.Root>
-	<Dialog.Trigger>
+	<Dialog.Trigger class="w-full">
 		<slot name="trigger">Open</slot>
 	</Dialog.Trigger>
 	<Dialog.Content>
