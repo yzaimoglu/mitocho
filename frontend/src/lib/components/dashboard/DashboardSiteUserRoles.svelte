@@ -52,7 +52,7 @@
 
 <ScrollArea class="h-40 mb-6 pt-2">
 	<div class="flex flex-col gap-2">
-		{#if user.permissions.length <= 0}
+		{#if user.roles.length <= 0}
 			<p>The user has no roles.</p>
 		{/if}
 		{#each user.roles as role, roleIndex}
