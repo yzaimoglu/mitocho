@@ -30,7 +30,11 @@
 		// check if credentials are right
 		loginStore.setCredentials(loginForm);
 		let otpUrl = `/auth/login/2fa?sid=${sid}&red=${red}`;
-		goto(otpUrl)
+		goto(otpUrl);
+	};
+
+	const getRegisterUrl = () => {
+		return `/auth/register?sid=${sid}&red=${red}`;
 	};
 </script>
 
@@ -81,6 +85,9 @@
 				<a href="/auth/forgot-password"><p class="text-xs">Forgot Password?</p></a>
 			</div>
 			<Button type="submit" class="mt-5">Login</Button>
+			<Button href={getRegisterUrl()} class="text-xs" type="button" variant="link"
+				>Register instead</Button
+			>
 		</form>
 	</Card.Content>
 </Card.Root>
