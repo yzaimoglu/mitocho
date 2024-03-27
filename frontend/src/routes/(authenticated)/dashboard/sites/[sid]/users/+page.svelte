@@ -4,12 +4,10 @@
 	import Loading from '@/loading/Loading.svelte';
 	import { loading } from '@/loading/loading';
 	import { onMount } from 'svelte';
-	import { levelSecondary, type SidebarOption } from '@/components/dashboard/Sidebar.svelte';
+	import { type SidebarOption } from '@/components/dashboard/Sidebar.svelte';
 	import SidebarLayoutPage from '@/components/SidebarLayoutPage.svelte';
-	import DashboardSite from '@/components/dashboard/DashboardSite.svelte';
 	import { page as storePage } from '$app/stores';
 	import MitochoPagination from '@/components/MitochoPagination.svelte';
-	import DashboardSiteSearch from '@/components/dashboard/DashboardSiteSearch.svelte';
 	import DashboardSiteUserSearch from '@/components/dashboard/DashboardSiteUserSearch.svelte';
 	import DashboardSiteUser, { type User } from '@/components/dashboard/DashboardSiteUser.svelte';
 
