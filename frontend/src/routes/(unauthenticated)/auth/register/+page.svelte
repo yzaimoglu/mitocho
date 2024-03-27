@@ -4,19 +4,25 @@
 	import { loading } from '@/loading/loading';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import CenterPage from '@/components/CenterPage.svelte';
+	import RegisterCard from '@/components/auth/RegisterCard.svelte';
 
-	const sid = $page.url.searchParams.get('sid');
-	const red = $page.url.searchParams.get('red');
+	let sid = $page.url.searchParams.get('sid');
+	let red = $page.url.searchParams.get('red');
 
 	onMount(() => {
 		console.log(`Site ID: ${sid}`);
-		console.log(`Redirect URL: ${red}`);		
+		console.log(`Redirect URL: ${red}`);
+		if (sid === null) sid = 'mitocho';
+		if (red === null) red = 'mitocho';
 		loading.finish();
 	});
 </script>
 
-<MitochoPage>
+<MitochoPage title="Register" description="Register an account">
 	<Loading>
-		<div>Auth Register</div>
+		<CenterPage>
+			<RegisterCard {sid} {red} />
+		</CenterPage>
 	</Loading>
 </MitochoPage>
