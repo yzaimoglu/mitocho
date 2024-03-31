@@ -1,20 +1,53 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import MitochoPage from '@/components/MitochoPage.svelte';
+	import FullPage from '@/components/FullPage.svelte';
 	import Loading from '@/loading/Loading.svelte';
 	import { loading } from '@/loading/loading';
 	import { onMount } from 'svelte';
-  
-  const sid = $page.params.sid;
-	
+	import { type SidebarOption } from '@/components/dashboard/Sidebar.svelte';
+	import SidebarLayoutPage from '@/components/SidebarLayoutPage.svelte';
+	import { page } from '$app/stores';
+	import DashboardSiteRoleCreate from '@/components/dashboard/DashboardSiteRoleCreate.svelte';
+
+	const sid = $page.params.sid;
+
+	// Sidebar settings
+	const sidebarOptions: SidebarOption[] = [
+		{
+			name: 'General',
+			active: false,
+			href: '/dashboard'
+		},
+		{
+			name: 'Settings',
+			active: false,
+			href: '/dashboard/settings'
+		},
+		{
+			name: 'Sites',
+			active: true,
+			href: '/dashboard/sites'
+		}
+	];
+
 	onMount(() => {
-		console.log(`Site ID: ${sid}`)
 		loading.finish();
 	});
 </script>
 
-<MitochoPage>
+<MitochoPage title="Create a new Role" description="Create a new role from here">
 	<Loading>
-		<div>Dashboard Sites Roles Create</div>
+		<FullPage>
+			<SidebarLayoutPage
+				current="/dashboard"
+				title="Dashboard"
+				description="Monitor registered users and manage your sites"
+				innerTitle="Create Role"
+				innerDescription={`${sid}`}
+				{sidebarOptions}
+			>
+				<DashboardSiteRoleCreate />
+			</SidebarLayoutPage>
+		</FullPage>
 	</Loading>
 </MitochoPage>
