@@ -12,6 +12,7 @@ bdev:
 	@go run mitocho.go
 
 fbuild:
+	@npm install --prefix ./frontend
 	@npm run build --prefix ./frontend
 
 bbuild:
